@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="chkIsFileExsit">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sFileName" type="string" xsi:type="element" />
+      <Parameter name="x_sTargetFolder" type="string" xsi:type="element" />
+      <Parameter name="x_bRes" type="bool" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //检查文件x_sFileName在目标文件夹中x_sTargetFolder是否存在
+  x_bRes=false
+  resize(sFileTemp,1,1)
+  sFileTemp[0]=""
+  if (libList(x_sTargetFolder,sFileTemp)==false)
+    return
+  endIf
+  //
+  for l_ni=0 to size(sFileTemp)-1
+    if x_sFileName==sFileTemp[l_ni]
+      x_bRes=true
+      return
+    endIf
+  endFor
+  
+end]]></Code>
+  </Program>
+</Programs>

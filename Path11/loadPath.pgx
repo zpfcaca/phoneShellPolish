@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="loadPath">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_bRes" type="bool" xsi:type="element" use="reference" />
+      <Parameter name="x_sFile" type="string" xsi:type="element" />
+    </Parameters>
+    <Code><![CDATA[begin
+  //加载路径
+  x_bRes=false
+  if prd:libLoad(sFolder+x_sFile)!=0
+    logMsg(sItem+":加载失败")
+    popUpMsg(sItem+":加载失败")
+    return
+  endIf
+  x_bRes=true
+  
+end]]></Code>
+  </Program>
+</Programs>

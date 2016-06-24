@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="OnF6" access="private" >
+    <Locals>
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+      <Local name="l_sMsg" type="string" xsi:type="array" size="1" />
+      <Local name="l_sYesNo" type="string" xsi:type="array" size="2" />
+    </Locals>
+    <Code><![CDATA[begin
+  //重新载入数据，所有做过的修改都不保存
+  l_sYesNo[0]="是"
+  l_sYesNo[1]="否"
+  l_sMsg="重载会删除所有修改，请确认!"
+  call user:questionDialog(l_sMsg,l_sYesNo,l_i)
+  if l_i==0 or l_i==1
+    call JTP()
+    popUpMsg("重载数据完成")
+    logMsg("重载数据完成")
+  endIf
+  bUserRefresh=true
+end]]></Code>
+  </Program>
+</Programs>

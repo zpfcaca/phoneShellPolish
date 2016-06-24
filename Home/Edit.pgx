@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="Edit">
+    <Locals>
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+      <Local name="l_sValue" type="string" xsi:type="array" size="1" />
+      <Local name="l_nSelect" type="num" xsi:type="array" size="1" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_nRes" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  
+  cls()
+  resize(sParameter,1,6)
+  sParameter[0]="j1"
+  sParameter[1]="j2"
+  sParameter[2]="j3"
+  sParameter[3]="j4"
+  sParameter[4]="j5"
+  sParameter[5]="j6"
+  //
+  resize(sListItemValue,1,size(sParameter))
+  sListItemValue[0]=toString(".3",PublicData:jHome.j1)
+  sListItemValue[1]=toString(".3",PublicData:jHome.j2)
+  sListItemValue[2]=toString(".3",PublicData:jHome.j3)
+  sListItemValue[3]=toString(".3",PublicData:jHome.j4)
+  sListItemValue[4]=toString(".3",PublicData:jHome.j5)
+  sListItemValue[5]=toString(".3",PublicData:jHome.j6)
+  //
+  for l_i=0 to size(sParameter)-1
+    call user:strlength(sParameter[l_i],user:nBottomX/2)
+    l_sValue=sListItemValue[l_i]
+    call user:strlength(l_sValue,user:nBottomX/2+1)
+    sParameter[l_i]=sParameter[l_i]+":"+l_sValue
+  endFor
+  
+  bUserRefresh=true
+  bListRefresh=true
+  //
+  do
+    if bUserRefresh
+      cls()
+      userPage()
+      gotoxy(1,1)
+      put("F1->记录")
+      call user:clear(0,13)
+      gotoxy(1,13)
+      put("F1")
+      gotoxy(1,2)
+      put("F2->移动")
+      gotoxy(6,13)
+      put("F2")
+      call user:typeMenu(8,"确定")
+    endIf
+    call user:setList(sItem,sParameter,bUserRefresh,bListRefresh,l_nSelect,l_sItem,l_nKey)
+    bUserRefresh=false
+    bListRefresh=false
+    call EnterPageKey(l_nKey,l_nSelect,sParameter[l_nSelect])
+    delay(0)
+  until l_nKey==255 or l_nKey==278
+  if l_nKey==278
+    PublicData:libSave()
+  endIf
+  bUserRefresh=true
+  bListRefresh=true 
+end]]></Code>
+  </Program>
+</Programs>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="loadmaster0">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sMasterFile0" type="string" xsi:type="element" />
+    </Parameters>
+    <Code><![CDATA[begin
+  if master:libLoad(x_sMasterFile0)<0
+    popUpMsg("nO ok")
+  endIf
+  //由于mastercam生成出来的真实坐标位置是保存在tTool里的。
+  frmaster[0].trsf=master:tTool.trsf
+  //取个数
+  nsize[0]=size(master:ptRoutingPath)
+  //存个数
+  resize(pdemo0,1,nsize[0])
+  //保存程序
+  master:libSave()
+end]]></Code>
+  </Program>
+</Programs>

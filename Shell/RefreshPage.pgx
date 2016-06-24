@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="RefreshPage" access="private" >
+    <Code><![CDATA[begin
+  //
+  gotoxy(1,1)
+  put("--操作信息--")
+  if !bPause
+    gotoxy(1,13)
+    put("暂停")
+  else
+    gotoxy(1,13)
+    put("继续")
+  endIf
+
+  gotoxy(6,13)
+  put("停止")
+end]]></Code>
+  </Program>
+</Programs>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="OnF3">
+    <Locals>
+      <Local name="l_sYesNo" type="string" xsi:type="array" size="2" />
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  
+  //
+  if sList[nSelected]!=""
+    l_sYesNo[0]="是"
+    l_sYesNo[1]="否"
+    call user:questionDialog("是否删除?",l_sYesNo,l_i)
+    if l_i==0 or l_i==1
+      switch nPage
+        case 0
+          if size(sPrd)==1
+            sPrd[nSelected]=""
+            sProductList[nSelected]=""
+          else
+            delete(sPrd[nSelected])
+            delete(sProductList[nSelected])
+            if nSelected>=1
+              nSelected=nSelected-1
+            endIf
+          endIf
+          
+        break
+        case 1
+          if size(sList)==1
+            sList[nSelected]=""
+          else
+            delete(sList[nSelected])
+            if nSelected>=1
+              nSelected=nSelected-1
+            endIf
+            
+          endIf
+        break
+      endSwitch
+      bListRefresh=true
+    else
+      popUpMsg("没有可以删除的项目")
+    endIf
+  endIf
+  bUserRefresh=true
+end]]></Code>
+  </Program>
+</Programs>

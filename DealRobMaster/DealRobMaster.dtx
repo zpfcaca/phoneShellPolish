@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Data/2">
+  <Datas>
+    <Data name="mNomSpeed" access="private" xsi:type="array" type="mdesc" size="1" />
+    <Data name="sFileList" access="public" xsi:type="array" type="string" size="1" />
+    <Data name="sDeli" access="public" xsi:type="array" type="string" size="4">
+      <Value key="0" value="A" />
+      <Value key="1" value="C" />
+      <Value key="2" value="B" />
+      <Value key="3" value="D" />
+    </Data>
+    <Data name="bUserRefresh" access="private" xsi:type="array" type="bool" size="1" />
+    <Data name="bListRefresh" access="private" xsi:type="array" type="bool" size="1" />
+    <Data name="bExit" access="private" xsi:type="array" type="bool" size="1" />
+    <Data name="nSelected" access="private" xsi:type="array" type="num" size="1" />
+    <Data name="sItem" access="private" xsi:type="array" type="string" size="1" />
+    <Data name="sFolder" access="private" xsi:type="array" type="string" size="1">
+      <Value key="0" value="Disk://robmaster/" />
+    </Data>
+    <Data name="sOutputFolder" access="private" xsi:type="array" type="string" size="1">
+      <Value key="0" value="Disk://Traj/" />
+    </Data>
+    <Data name="sFileTemp" access="private" xsi:type="array" type="string" size="1" />
+    <Data name="fFrame" access="private" xsi:type="array" type="frame" size="1">
+      <Value key="0" fatherId="world[0]" />
+    </Data>
+    <Data name="tTool" access="private" xsi:type="array" type="tool" size="1">
+      <Value key="0" fatherId="flange[0]" ioLink="valve1" />
+    </Data>
+  </Datas>
+</Database>

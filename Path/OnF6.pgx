@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="OnF6">
+    <Locals>
+      <Local name="l_sTemp" type="string" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //参数
+  call setPara()
+end]]></Code>
+  </Program>
+</Programs>

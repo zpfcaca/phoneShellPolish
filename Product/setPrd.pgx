@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="setPrd">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sInOut" type="string" xsi:type="array" use="reference" />
+      <Parameter name="x_sOut" type="string" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_sItemName" type="string" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  x_sOut=""
+  call PublicProg:addListItem(l_sItemName,x_sInOut,"P")
+  if l_sItemName!=""
+    //建立
+    if x_sInOut[0]!=""
+      insert(x_sInOut[size(x_sInOut)])
+    endIf
+    x_sInOut[size(x_sInOut)-1]=l_sItemName
+    x_sOut=l_sItemName
+    call user:listadd(l_sItemName)
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

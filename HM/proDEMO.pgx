@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="proDEMO">
+    <Locals>
+      <Local name="l_nj" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //这是程序运行的选择，根据用户选择的bA[0至9]状态运行单个或多个程序
+  //----------------------------------------------------------------0
+  if bA[0]==true
+    //movej(jA[0],t2[0],m1)
+    movej(pdemo0[0],t2[0],m1)
+    waitEndMove()
+    ndemo=0
+    //重置l_nj
+    l_nj=0
+    for ndemo=0 to nsize[0]-1
+      //当ndemo和nPeak相等时
+      if ndemo==nPeak0[l_nj] and nPeak0[l_nj]!=0
+        //速度加快
+        movej(compose(pdemo0[ndemo],frmaster[0],{0,0,nPYC*-0.002,0,0,0}),t2[0],mFast)
+        //自加1，等待下一个点加速
+        l_nj=l_nj+1
+        delay(0)
+        //否则使用普通速度
+      else
+        movej(compose(pdemo0[ndemo],frmaster[0],{0,0,nPYC*-0.002,0,0,0}),t2[0],mSuDu[1])
+      endIf
+    endFor
+    //movej(jA[1],t2[0],m1)
+    movej(pdemo0[nsize[0]-1],t2[0],m1)
+    waitEndMove()
+  endIf
+  //---------------------------------------------------------------------------------1
+  if bA[1]==true
+    //movej(jA[2],t2[1],m1)
+    movej(pdemo1[0],t2[1],m1)
+    waitEndMove()
+    ndemo=0
+    //重置l_nj
+    l_nj=0
+    for ndemo=0 to nsize[1]-1
+      //当ndemo和nPeak相等时
+      if ndemo==nPeak1[l_nj] and nPeak1[l_nj]!=0
+        //速度加快
+        movej(compose(pdemo1[ndemo],frmaster[1],{0,0,nPYC*-0.002,0,0,0}),t2[1],mFast)
+        //自加1，等待下一个点加速
+        l_nj=l_nj+1
+        delay(0)
+        //否则使用普通速度
+      else
+        movej(compose(pdemo1[ndemo],frmaster[1],{0,0,nPYC*-0.002,0,0,0}),t2[1],mSuDu[1])
+      endIf
+    endFor
+    //movej(jA[3],t2[1],m1)
+    movej(pdemo1[nsize[1]-1],t2[1],m1)
+    waitEndMove()
+  endIf
+  //----------------------------------------------------------------------------------------2
+  if bA[2]==true
+    //movej(jA[4],t2[2],m1)
+    movej(pdemo2[0],t2[2],m1)
+    waitEndMove()
+    ndemo=0
+    //重置l_nj
+    l_nj=0
+    for ndemo=0 to nsize[2]-1
+      //当ndemo和nPeak相等时
+      if ndemo==nPeak2[l_nj] and nPeak2[l_nj]!=0
+        //速度加快
+        movej(compose(pdemo2[ndemo],frmaster[2],{0,0,nPYC*-0.002,0,0,0}),t2[2],mFast)
+        //自加1，等待下一个点加速
+        l_nj=l_nj+1
+        delay(0)
+        //否则使用普通速度
+      else
+        movej(compose(pdemo2[ndemo],frmaster[2],{0,0,nPYC*-0.002,0,0,0}),t2[2],mSuDu[1])
+      endIf
+    endFor
+    //movej(jA[5],t2[2],m1)
+    movej(pdemo2[nsize[2]-1],t2[2],m1)
+    waitEndMove()
+  endIf
+  //------------------------------------------------------------------------------------3
+  if bA[3]==true
+    //movej(jA[6],t2[3],m1)
+    movej(pdemo3[0],t2[3],m1)
+    waitEndMove()
+    ndemo=0
+    //重置l_nj
+    l_nj=0
+    for ndemo=0 to nsize[3]-1
+      //当ndemo和nPeak相等时
+      if ndemo==nPeak3[l_nj] and nPeak3[l_nj]!=0
+        //速度加快
+        movej(compose(pdemo3[ndemo],frmaster[3],{0,0,nPYC*-0.002,0,0,0}),t2[3],mFast)
+        //自加1，等待下一个点加速
+        l_nj=l_nj+1
+        delay(0)
+        //否则使用普通速度
+      else
+        movej(compose(pdemo3[ndemo],frmaster[3],{0,0,nPYC*-0.002,0,0,0}),t2[3],mSuDu[1])
+      endIf
+    endFor
+    //movej(jA[7],t2[3],m1)
+    movej(pdemo3[nsize[3]-1],t2[3],m1)
+    waitEndMove()
+  endIf
+  //-----------------------------------------------------------------------------------4
+  if bA[4]==true
+    // movej(jA[8],t2[4],m1)
+    movej(pdemo4[0],t2[4],m1)
+    waitEndMove()
+    ndemo=0
+    //重置l_nj
+    l_nj=0
+    for ndemo=0 to nsize[4]-1
+      //当ndemo和nPeak相等时
+      if ndemo==nPeak4[l_nj] and nPeak4[l_nj]!=0
+        //速度加快
+        movej(compose(pdemo4[ndemo],frmaster[4],{0,0,nPYC*-0.002,0,0,0}),t2[4],mFast)
+        //自加1，等待下一个点加速
+        l_nj=l_nj+1
+        delay(0)
+        //否则使用普通速度
+      else
+        movej(compose(pdemo4[ndemo],frmaster[4],{0,0,nPYC*-0.002,0,0,0}),t2[4],mSuDu[1])
+      endIf
+    endFor
+    //movej(jA[9],t2[4],m1)
+    movej(pdemo4[nsize[4]-1],t2[4],m1)
+    waitEndMove()
+  endIf
+  //-------------------------------------------------------------------------------------5
+  if bA[5]==true
+    //movej(jA[10],t2[5],m1)
+    movej(pdemo5[0],t2[5],m1)
+    waitEndMove()
+    ndemo=0
+    //重置l_nj
+    l_nj=0
+    for ndemo=0 to nsize[5]-1
+      //当ndemo和nPeak相等时
+      if ndemo==nPeak5[l_nj] and nPeak5[l_nj]!=0
+        //速度加快
+        movej(compose(pdemo5[ndemo],frmaster[5],{0,0,nPYC*-0.002,0,0,0}),t2[5],mFast)
+        //自加1，等待下一个点加速
+        l_nj=l_nj+1
+        delay(0)
+        //否则使用普通速度
+      else
+        movej(compose(pdemo5[ndemo],frmaster[5],{0,0,nPYC*-0.002,0,0,0}),t2[5],mSuDu[1])
+      endIf
+    endFor
+    //movej(jA[11],t2[5],m1)
+    movej(pdemo5[nsize[5]-1],t2[5],m1)
+    waitEndMove()
+  endIf
+  //---------------------------------------------------------------------------------6
+  if bA[6]==true
+    //movej(jA[12],t2[6],m1)
+    movej(pdemo6[0],t2[6],m1)
+    waitEndMove()
+    ndemo=0
+    //重置l_nj
+    l_nj=0
+    for ndemo=0 to nsize[6]-1
+      //当ndemo和nPeak相等时
+      if ndemo==nPeak6[l_nj] and nPeak6[l_nj]!=0
+        //速度加快
+        movej(compose(pdemo6[ndemo],frmaster[6],{0,0,nPYC*-0.002,0,0,0}),t2[6],mFast)
+        //自加1，等待下一个点加速
+        l_nj=l_nj+1
+        delay(0)
+        //否则使用普通速度
+      else
+        movej(compose(pdemo6[ndemo],frmaster[6],{0,0,nPYC*-0.002,0,0,0}),t2[6],mSuDu[1])
+      endIf
+    endFor
+    //movej(jA[13],t2[6],m1)
+    movej(pdemo6[nsize[6]-1],t2[6],m1)
+    waitEndMove()
+  endIf
+  //-----------------------------------------------------------------------------------7
+  if bA[7]==true
+    //movej(jA[14],t2[7],m1)
+    movej(pdemo7[0],t2[7],m1)
+    waitEndMove()
+    ndemo=0
+    //重置l_nj
+    l_nj=0
+    for ndemo=0 to nsize[7]-1
+      //当ndemo和nPeak相等时
+      if ndemo==nPeak7[l_nj] and nPeak7[l_nj]!=0
+        //速度加快
+        movej(compose(pdemo7[ndemo],frmaster[7],{0,0,nPYC*-0.002,0,0,0}),t2[7],mFast)
+        //自加1，等待下一个点加速
+        l_nj=l_nj+1
+        delay(0)
+        //否则使用普通速度
+      else
+        movej(compose(pdemo7[ndemo],frmaster[7],{0,0,nPYC*-0.002,0,0,0}),t2[7],mSuDu[1])
+      endIf
+    endFor
+    //movej(jA[15],t2[7],m1)
+    movej(pdemo7[nsize[7]-1],t2[7],m1)
+    waitEndMove()
+  endIf
+  //--------------------------------------------------------------------------8
+  if bA[8]==true
+    //movej(jA[16],t2[8],m1)
+    movej(pdemo8[0],t2[8],m1)
+    waitEndMove()
+    ndemo=0
+    //重置l_nj
+    l_nj=0
+    for ndemo=0 to nsize[8]-1
+      //当ndemo和nPeak相等时
+      if ndemo==nPeak8[l_nj] and nPeak8[l_nj]!=0
+        //速度加快
+        movej(compose(pdemo8[ndemo],frmaster[8],{0,0,nPYC*-0.002,0,0,0}),t2[8],mFast)
+        //自加1，等待下一个点加速
+        l_nj=l_nj+1
+        delay(0)
+        //否则使用普通速度
+      else
+        movej(compose(pdemo8[ndemo],frmaster[8],{0,0,nPYC*-0.002,0,0,0}),t2[8],mSuDu[1])
+      endIf
+    endFor
+    //movej(jA[17],t2[8],m1)
+    movej(pdemo8[nsize[8]-1],t2[8],m1)
+    waitEndMove()
+  endIf
+  //-----------------------------------------------------------------------------------------9
+  if bA[9]==true
+    // movej(jA[18],t2[9],m1)
+    movej(pdemo9[0],t2[9],m1)
+    waitEndMove()
+    ndemo=0
+    //重置l_nj
+    l_nj=0
+    for ndemo=0 to nsize[9]-1
+      //当ndemo和nPeak相等时
+      if ndemo==nPeak9[l_nj] and nPeak9[l_nj]!=0
+        //速度加快
+        movej(compose(pdemo9[ndemo],frmaster[9],{0,0,nPYC*-0.002,0,0,0}),t2[9],mFast)
+        //自加1，等待下一个点加速
+        l_nj=l_nj+1
+        delay(0)
+        //否则使用普通速度
+      else
+        movej(compose(pdemo9[ndemo],frmaster[9],{0,0,nPYC*-0.002,0,0,0}),t2[9],mSuDu[1])
+      endIf
+    endFor
+    // movej(jA[19],t2[9],m1)
+    movej(pdemo9[nsize[9]-1],t2[9],m1)
+    waitEndMove()
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

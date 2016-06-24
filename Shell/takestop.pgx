@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="takestop" access="private" >
+    <Code><![CDATA[begin
+  //信号
+  b2=true
+  while true
+    if distop==true
+      call stop()
+      b2=true
+    endIf
+    if distart==true
+      if b2
+        call Message("启动...",true)
+      endIf
+      b2=false
+    endIf
+
+    //    wait(distop==true)
+    //    b2=true
+
+    //    wait(distart==true)
+    //    b2=false
+
+    delay(0)
+  endWhile
+end]]></Code>
+  </Program>
+</Programs>

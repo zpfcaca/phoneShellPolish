@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="madol">
+    <Code><![CDATA[begin
+  //nPY:打磨计数；当nPY=1000时，提示更换砂带
+  //
+  n2=0
+  waitEndMove()
+  for ni=0 to 2 step 1
+    for nc=0 to 2 step 1
+      movej(jready,t1,m1)
+      do
+        if dixi==false
+          //码垛盘
+          movel(compose(p1,f1,{nc*180,ni*100,0,0,0,0}),t1,m1)
+          movel(compose(p2,f1,{nc*180,ni*100,0,0,0,0}),t1,m1)
+          waitEndMove()
+          doxi=true
+          delay(0.8)
+          movel(compose(p1,f1,{nc*180,ni*100,0,0,0,0}),t1,m1)
+          waitEndMove()
+          n2=n2+1
+          waitEndMove()
+        endIf
+        //
+        if n2==2
+          movel(compose(p1,f1,{nc*180,ni*100,0,0,0,0}),t1,m1)
+          waitEndMove()
+          stopMove()
+          doxi=false
+          n2=0
+          waitEndMove()
+          wait(distart==true)
+          waitEndMove()
+          restartMove()
+          movel(compose(p2,f1,{nc*180,ni*100,0,0,0,0}),t1,m1)
+          waitEndMove()
+          doxi=true
+          delay(0.5)
+          movel(compose(p1,f1,{nc*180,ni*100,0,0,0,0}),t1,m1)
+          waitEndMove()
+        endIf
+      until dixi==true
+      //
+      n2=0
+      movej(jbegin,t1,m1)
+      waitEndMove()
+      //补偿量
+      nPYtest=nPY*-0.002
+      gotoxy(1,1)
+      put(nPYtest)
+      //
+      for ndemo=0 to 313
+        movej(compose(pdemo[ndemo],frmaster,{0,0,nPYC*-0.002,0,0,0}),t2,mSuDu[1])
+      endFor
+      waitEndMove()
+      //
+      nPY=nPY+1
+      nPYB=nPYB+1
+      if nPYB==5
+        nPYC=nPYC+1
+        nPYB=0
+      endIf
+      //
+      if ditab==true
+        movej(jbegin,t1,m1)
+        waitEndMove()
+        stopMove()
+        wait(ditab==false)
+        restartMove()
+      endIf
+      movej(jend,t1,m1)
+      waitEndMove()
+      movej(jXieLiao,t1,m1)
+      waitEndMove()
+      doxi=false
+      dochui=true
+      waitEndMove()
+      delay(0.2)
+      waitEndMove()
+      wait(dixi==false)
+      dochui=false
+      delay(1)
+      movej(jXieLiao,t1,m1)
+      movej(jstart,t1,m1)
+      waitEndMove()
+      //
+      if nPY==1000
+        stopMove()
+        gotoxy(5,5)
+        put("1000次补偿完成，请更换砂带")
+        nPYC=0
+        nPY=0
+        nPYtest=0
+        wait(distart==true)
+        restartMove()
+      endIf
+      wait(b2==false)
+    endFor
+  endFor
+  waitEndMove()
+end]]></Code>
+  </Program>
+</Programs>

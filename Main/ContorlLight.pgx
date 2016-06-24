@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="ContorlLight">
+    <Code><![CDATA[begin
+  //
+  
+  while !bExit
+    //红灯
+    if PublicData:sStatus=="stop"
+      IO:dOut["dOut2"]=true
+      IO:dOut["dOut3"]=false
+      IO:dOut["dOut4"]=false
+    elseIf PublicData:sStatus=="pause"
+      IO:dOut["dOut2"]=false
+      IO:dOut["dOut3"]=false
+      IO:dOut["dOut4"]=true
+    elseIf PublicData:sStatus=="run"  
+      IO:dOut["dOut2"]=false
+      IO:dOut["dOut3"]=true
+      IO:dOut["dOut4"]=false
+    endIf
+    delay(0)
+  endWhile
+  
+end]]></Code>
+  </Program>
+</Programs>

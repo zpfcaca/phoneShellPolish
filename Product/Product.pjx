@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://www.staubli.com/robotics/VAL3/Project/3">
+  <Parameters version="s7.8.3" stackSize="5000" millimeterUnit="true" />
+  <Programs>
+    <Program file="EditPath.pgx" />
+    <Program file="getList.pgx" />
+    <Program file="Init.pgx" />
+    <Program file="InsertPath.pgx" />
+    <Program file="Main.pgx" />
+    <Program file="MainKey.pgx" />
+    <Program file="OnF1.pgx" />
+    <Program file="OnF2.pgx" />
+    <Program file="OnF3.pgx" />
+    <Program file="OnF4.pgx" />
+    <Program file="OnF5.pgx" />
+    <Program file="OnF6.pgx" />
+    <Program file="OnF7.pgx" />
+    <Program file="OnF8.pgx" />
+    <Program file="readFileList.pgx" />
+    <Program file="Refresh.pgx" />
+    <Program file="RefreshList.pgx" />
+    <Program file="Save.pgx" />
+    <Program file="selectFile.pgx" />
+    <Program file="selectPath.pgx" />
+    <Program file="setPrd.pgx" />
+    <Program file="start.pgx" />
+    <Program file="stop.pgx" />
+  </Programs>
+  <Database>
+    <Data file="Product.dtx" />
+  </Database>
+  <Libraries>
+    <Library alias="master" path="Disk://template/normal/normal.pjx" />
+    <Library alias="user" path="Disk://userPage/USERPAGE.pjx" />
+    <Library alias="PublicData" path="Disk://PublicData/PublicData.pjx" />
+    <Library alias="PublicProg" path="Disk://PublicProg/PublicProg.pjx" />
+    <Library alias="Path" path="Disk://Path/Path.pjx" />
+    <Library alias="Motion" path="Disk://Motion/Motion.pjx" />
+    <Library alias="SparePoint" path="Disk://SparePoint/SparePoint.pjx" />
+  </Libraries>
+</Project>

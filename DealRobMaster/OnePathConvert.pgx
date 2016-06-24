@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="OnePathConvert">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sFolder" type="string" xsi:type="element" />
+      <Parameter name="x_sMasterFile" type="string" xsi:type="element" />
+      <Parameter name="x_sOutputFolder" type="string" xsi:type="element" />
+      <Parameter name="x_bRes" type="bool" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_nsize" type="num" xsi:type="array" size="1" />
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+      <Local name="l_nj" type="num" xsi:type="array" size="1" />
+      <Local name="l_jJoint" type="joint" xsi:type="array" size="2" />
+    </Locals>
+    <Code><![CDATA[begin
+  //载入master文件
+  x_bRes=false
+  
+  if master:libLoad(x_sFolder+x_sMasterFile)!=0
+    return
+  endIf
+  //由于mastercam生成出来的真实坐标位置是保存在tTool里的。
+  prd:fFrmMaster.trsf=master:fUserFrame.trsf
+  Frame:fFrame["Frame1"].trsf=master:fUserFrame.trsf
+  prd:tTool.trsf=master:tTool.trsf
+  prd:sFrameName=""
+  prd:sToolName=""
+  //补偿量(mm)
+  prd:nCompDelta=0.002
+  //取个数
+  l_nsize=size(master:ptRoutingPath)
+  //存个数
+  resize(prd:pDemo,1,l_nsize)
+  resize(prd:sPtParameter,1,l_nsize)
+  for l_ni=0 to l_nsize-1
+    prd:sPtParameter[l_ni]="-1/-1/-1/-1/-1/-1"
+  endFor
+  //
+  prd:mNormal=master:mdLineBlend
+  prd:mJoint=master:mdJointBlend
+  prd:mJoint.vel=100
+  prd:mJoint.accel=prd:mJoint.decel=50
+  prd:mJoint.tvel=300
+  prd:mJoint.reach=prd:mJoint.leave=1
+  //
+  l_nj=0
+  for l_ni=0 to l_nsize-1
+    //点复制
+    prd:pDemo[l_ni].trsf=master:ptRoutingPath[l_ni].trsf
+    prd:pDemo[l_ni].config.shoulder=ssame
+    prd:pDemo[l_ni].config.elbow=esame
+    prd:pDemo[l_ni].config.wrist=wsame
+    //
+    if l_ni!=0
+      if (pointToJoint(master:tTool,master:jtPark,master:ptRoutingPath[l_ni],l_jJoint[1])==false)
+        popUpMsg("转换失败："+toString("",l_ni))
+        return
+      endIf
+      if(pointToJoint(master:tTool,master:jtPark,master:ptRoutingPath[l_ni-1],l_jJoint[0])==false)
+        popUpMsg("转换失败："+toString("",l_ni-1))
+        return
+      endIf
+      //如果超出50，则把l_ni的数据赋值到nPeak[l_nj]
+      if abs(l_jJoint[1].j6-l_jJoint[0].j6)>50
+        prd:nPeak[l_nj]=l_ni
+        l_nj=l_nj+1
+        insert(prd:nPeak[l_nj])
+      endIf
+    endIf
+  endFor
+  delete(prd:nPeak[l_nj])
+  //保存程序
+  prd:libSave(x_sOutputFolder+x_sMasterFile)
+  Frame:libSave()
+  x_bRes=true
+end]]></Code>
+  </Program>
+</Programs>

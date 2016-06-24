@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="addDirectory" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_bRe" type="bool" xsi:type="element" use="reference" />
+      <Parameter name="x_sPath" type="string" xsi:type="element" />
+      <Parameter name="x_sDirName" type="string" xsi:type="element" />
+    </Parameters>
+    <Locals>
+      <Local name="l_bool1" type="bool" xsi:type="array" size="1" />
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //建立一个文件夹
+  x_bRe=libList("Disk://",sContent)
+  if !x_bRe
+    return
+  endIf
+  
+  if sContent[0]!=""
+    x_bRe=$copy("Disk://"+sContent[0],x_sPath+"/"+x_sDirName)
+    if !x_bRe
+      return
+    endIf
+    x_bRe=libList(x_sPath+"/"+x_sDirName,sContent)
+    if !x_bRe
+      return
+    endIf
+    for l_i=0 to size(sContent)-1
+      if sContent[l_i]!=""
+        x_bRe=$delete(x_sPath+"/"+x_sDirName+"/"+sContent[l_i])
+        if !x_bRe
+          return
+        endIf
+      endIf
+    endFor
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="addBoolArray" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_In" type="bool" xsi:type="array" use="reference" />
+      <Parameter name="x_nNum" type="num" xsi:type="element" />
+      <Parameter name="x_bRes" type="bool" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //建立指定数目的字符串数组
+  //x_sStrIn:返回的新数组
+  //x_nNum:数组个数
+  //x_bRes:函数返回值
+  x_bRes=false
+  if x_nNum<1
+    popUpMsg("新增点个数小于1")
+    return
+  endIf
+  //取整
+  x_nNum=roundDown(x_nNum)
+  //删除原有的数组
+  while size(x_In)>1
+    delete(x_In[0])
+  endWhile
+  x_In[0]=false
+  //插入新数据
+  for l_i=1 to x_nNum-1
+    insert(x_In[l_i])
+  endFor
+  x_bRes=true
+end]]></Code>
+  </Program>
+</Programs>

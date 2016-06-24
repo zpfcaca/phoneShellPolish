@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Data/2">
+  <Datas>
+    <Data name="mNomSpeed" access="private" xsi:type="array" type="mdesc" size="1" />
+    <Data name="nPeak" access="public" xsi:type="array" type="num" size="1" />
+    <Data name="fFrmMaster" access="public" xsi:type="array" type="frame" size="1">
+      <Value key="0" fatherId="world[0]" />
+    </Data>
+    <Data name="pDemo" access="public" xsi:type="array" type="pointRx" size="1">
+      <Value key="0" fatherId="fFrmMaster[0]" />
+    </Data>
+    <Data name="mNormal" access="public" xsi:type="array" type="mdesc" size="1">
+      <Value key="0" accel="20" decel="20" tmax="100" leave="1" reach="1" blend="cartesian" />
+    </Data>
+    <Data name="mJoint" access="public" xsi:type="array" type="mdesc" size="1" />
+    <Data name="sFrameName" access="public" xsi:type="array" type="string" size="1" />
+    <Data name="sToolName" access="public" xsi:type="array" type="string" size="1" />
+    <Data name="sPtParameter" access="public" xsi:type="array" type="string" size="1" />
+    <Data name="sJtParameter" access="public" xsi:type="array" type="string" size="1" />
+    <Data name="tTool" access="public" xsi:type="array" type="tool" size="1">
+      <Value key="0" fatherId="flange[0]" ioLink="valve1" />
+    </Data>
+  </Datas>
+</Database>

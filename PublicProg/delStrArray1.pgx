@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="delStrArray1" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sStrIn" type="string" xsi:type="array" use="reference" />
+      <Parameter name="x_nPos" type="num" xsi:type="element" />
+      <Parameter name="x_nNum" type="num" xsi:type="element" />
+    </Parameters>
+    <Locals>
+      <Local name="l_nSize" type="num" xsi:type="array" size="1" />
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //删除字符串数组
+  //x_sStrIn:返回的新数组
+  //x_nPos：起始位置
+  //x_nNum:删除数组个数
+  //取整
+  x_nNum=roundDown(x_nNum)
+  if x_nNum<1
+    return
+  endIf 
+  if x_nNum>size(x_sStrIn)
+    x_nNum=size(x_sStrIn)
+  endIf
+  
+  //
+  if x_nPos<0
+    x_nPos=0
+  else
+    if x_nPos>size(x_sStrIn)-1
+      x_nPos=size(x_sStrIn)-1
+    endIf
+  endIf
+  //
+  if size(x_sStrIn)<=1
+    x_sStrIn=""
+    return
+  endIf
+  //
+  for l_i=x_nPos to min(size(x_sStrIn)-1,x_nPos+x_nNum-1)
+    delete(x_sStrIn[size(x_sStrIn)-1])
+  endFor
+end]]></Code>
+  </Program>
+</Programs>

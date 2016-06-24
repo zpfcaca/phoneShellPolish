@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://www.staubli.com/robotics/VAL3/Project/3">
+  <Parameters version="s7.8.3" stackSize="5000" millimeterUnit="true" />
+  <Programs>
+    <Program file="Edit.pgx" />
+    <Program file="EnterPageKey.pgx" />
+    <Program file="getFrame.pgx" />
+    <Program file="Main.pgx" />
+    <Program file="MainKey.pgx" />
+    <Program file="OnF1.pgx" />
+    <Program file="OnF2.pgx" />
+    <Program file="OnF7.pgx" />
+    <Program file="OnF8.pgx" />
+    <Program file="Refresh.pgx" />
+    <Program file="RefreshList.pgx" />
+    <Program file="SetFrame.pgx" />
+    <Program file="start.pgx" />
+    <Program file="stop.pgx" />
+  </Programs>
+  <Database>
+    <Data file="Frame.dtx" />
+  </Database>
+  <Libraries>
+    <Library alias="user" path="Disk://userPage/USERPAGE.pjx" />
+  </Libraries>
+</Project>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="MainKey">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_nKey" type="num" xsi:type="element" />
+    </Parameters>
+    <Locals>
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  switch x_nKey
+    //编辑
+    case 271,270
+      call OnF1()
+    break
+    //取反
+    case 272
+      call OnF2()
+    break
+    //删除
+    case 273
+      call OnF3()
+    break
+    //模拟
+    case 274
+      call OnF4()
+    break
+    //
+    case 275
+    break
+    //
+    case 276
+      call OnF6()
+    break
+    //save
+    case 277
+      call OnF7()
+    break
+    //返回
+    case 278,255
+      call OnF8("是否返回")
+    break
+  endSwitch
+end]]></Code>
+  </Program>
+</Programs>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="EnterPageKey">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_nKey" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_nSelect" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_sItem" type="string" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_sStr" type="string" xsi:type="array" size="1" />
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_sEmpty" type="string" xsi:type="array" size="1" />
+      <Local name="l_sValue" type="string" xsi:type="array" size="1" />
+      <Local name="l_nItem" type="num" xsi:type="array" size="1" />
+      <Local name="l_nView" type="num" xsi:type="array" size="1" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+      <Local name="lp" type="point" xsi:type="array" size="1" />
+      <Local name="l_sYN" type="string" xsi:type="array" size="2" />
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_nTemp" type="num" xsi:type="array" size="1" />
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  //编辑项目
+  switch x_nSelect
+    //
+    case 0
+      
+    break
+    //砂带补偿量
+    default
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],l_nTemp,x_nSelect)
+        if l_nTemp>0.08
+          popUpMsg("最大0.08")
+          l_nTemp=0.08
+          sParameter[x_nSelect]=sPath[x_nSelect-1]
+          sListItemValue[0]=toString(".4",PublicData:nDelta)
+          call user:strlength(sParameter[l_i],user:nBottomX/2)
+          l_sValue=sListItemValue[l_i]
+          call user:strlength(l_sValue,user:nBottomX/2+1)
+          sParameter[l_i]=sParameter[l_i]+":"+l_sValue
+        endIf
+        
+        if prd:libLoad("Disk://Traj/"+sPath[x_nSelect-1])==0
+          prd:nCompDelta=l_nTemp
+          prd:libSave()
+        endIf
+      endIf
+      
+    break
+  endSwitch
+  if x_nKey==270
+    bUserRefresh=true
+    bListRefresh=true
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

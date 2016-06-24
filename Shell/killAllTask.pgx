@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="killAllTask" access="private" >
+    <Code><![CDATA[begin
+  taskKill("Page")
+  wait(taskStatus("Page")==-1)
+  taskKill("Mot")
+  wait(taskStatus("Mot")==-1)
+  taskKill("sgd")
+  wait(taskStatus("sgd")==-1)
+end]]></Code>
+  </Program>
+</Programs>

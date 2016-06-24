@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="EditPoint">
+    <Locals>
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+      <Local name="l_sValue" type="string" xsi:type="array" size="1" />
+      <Local name="l_nSelect" type="num" xsi:type="array" size="1" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_nRes" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  switch nPage
+    //运动点
+    case 1
+      cls()
+      resize(sParameter,1,11)
+      sParameter[0]="X"
+      sParameter[1]="Y"
+      sParameter[2]="Z"
+      sParameter[3]="Rx"
+      sParameter[4]="Ry"
+      sParameter[5]="Rz"
+      sParameter[6]="P1"
+      sParameter[7]="P2"
+      sParameter[8]="IO1"
+      sParameter[9]="IO2"
+      sParameter[10]="delay"
+      //
+      resize(sListItemValue,1,size(sParameter))
+      sListItemValue[0]=toString(".3",prd:pDemo[nSelected].trsf.x)
+      sListItemValue[1]=toString(".3",prd:pDemo[nSelected].trsf.y)
+      sListItemValue[2]=toString(".3",prd:pDemo[nSelected].trsf.z)
+      sListItemValue[3]=toString(".3",prd:pDemo[nSelected].trsf.rx)
+      sListItemValue[4]=toString(".3",prd:pDemo[nSelected].trsf.ry)
+      sListItemValue[5]=toString(".3",prd:pDemo[nSelected].trsf.rz)
+      //解析sPtParameter
+      call getPtPara(prd:sPtParameter[nSelected],sPtPara)
+      sListItemValue[6]=sPtPara[0]
+      sListItemValue[7]=sPtPara[1]
+      sListItemValue[8]=sPtPara[2]
+      sListItemValue[9]=sPtPara[3]
+      sListItemValue[10]=sPtPara[4]
+      //
+      for l_i=0 to size(sParameter)-1
+        call user:strlength(sParameter[l_i],user:nBottomX/2)
+        l_sValue=sListItemValue[l_i]
+        call user:strlength(l_sValue,user:nBottomX/2+1)
+        sParameter[l_i]=sParameter[l_i]+":"+l_sValue
+      endFor
+      
+      bUserRefresh=true
+      bListRefresh=true
+      //
+      do
+        if bUserRefresh
+          cls()
+          call user:clear(0,13)
+          call user:typeMenu(8,"确定")
+        endIf
+        call user:setList("编辑点",sParameter,bUserRefresh,bListRefresh,l_nSelect,l_sItem,l_nKey)
+        bUserRefresh=false
+        bListRefresh=false
+        call EnterPageKey(l_nKey,l_nSelect,sParameter[l_nSelect])
+        delay(0)
+      until l_nKey==255 or l_nKey==278
+      prd:sPtParameter[nSelected]=sListItemValue[6]+"/"+sListItemValue[7]+"/"+sListItemValue[8]+"/"+sListItemValue[9]+"/"+sListItemValue[10]
+      bUserRefresh=true
+      bListRefresh=true 
+    break
+  endSwitch
+end]]></Code>
+  </Program>
+</Programs>

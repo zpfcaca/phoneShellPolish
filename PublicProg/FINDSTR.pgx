@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="FindStr" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sFindStr" type="string" xsi:type="element" />
+      <Parameter name="x_sStrArray" type="string" xsi:type="array" use="reference" />
+      <Parameter name="x_nPos" type="num" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_nSize" type="num" xsi:type="array" size="1" />
+      <Local name="i" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //在x_sStrArray中查找x_sFindStr
+  //x_nPos:位置
+  //
+  l_nSize=size(x_sStrArray)
+  for  i=0 to l_nSize-1
+    if x_sFindStr==x_sStrArray[i]
+      x_nPos=i
+      return
+    endIf
+  endFor
+  x_nPos=-1
+end]]></Code>
+  </Program>
+</Programs>

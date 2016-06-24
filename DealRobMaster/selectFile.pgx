@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="selectFile" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sDelimiter" type="string" xsi:type="array" use="reference" />
+      <Parameter name="x_sList" type="string" xsi:type="array" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+      <Local name="l_nj" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //根据x_sDelimiter(分隔符)找出需要的文件
+  for l_nj=0 to size(x_sList)-1
+    if x_sList[l_nj]!=""
+      for l_ni=0 to size(x_sDelimiter)-1
+        if left(x_sList[l_nj],1)==x_sDelimiter[l_ni]
+          l_ni=size(x_sDelimiter)
+        endIf
+        if l_ni==size(x_sDelimiter)-1
+          delete(x_sList[l_nj])
+          l_nj=l_nj-1
+        endIf
+      endFor
+    endIf
+  endFor
+end]]></Code>
+  </Program>
+</Programs>

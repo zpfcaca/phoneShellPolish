@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="OnF2">
+    <Locals>
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  switch nPage
+    //新建产品
+    case 0
+      call setPrd(sList,l_sItem)
+      if l_sItem!=""
+        if sPrd[nSelected]!=""
+          nSelected=nSelected+1
+          insert(sPrd[nSelected])
+          insert(sProductList[nSelected])
+        endIf
+        sPrd[nSelected]=l_sItem
+        sProductList[nSelected]=""
+      endIf
+    break
+    //插入路径
+    case 1
+      call InsertPath()
+    break
+  endSwitch
+  bUserRefresh=bListRefresh=true
+end]]></Code>
+  </Program>
+</Programs>

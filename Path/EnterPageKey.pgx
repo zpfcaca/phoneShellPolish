@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="EnterPageKey">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_nKey" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_nSelect" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_sItem" type="string" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_sStr" type="string" xsi:type="array" size="1" />
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_sEmpty" type="string" xsi:type="array" size="1" />
+      <Local name="l_sValue" type="string" xsi:type="array" size="1" />
+      <Local name="l_nItem" type="num" xsi:type="array" size="1" />
+      <Local name="l_nView" type="num" xsi:type="array" size="1" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+      <Local name="lp" type="point" xsi:type="array" size="1" />
+      <Local name="l_sYN" type="string" xsi:type="array" size="2" />
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_nTemp" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  //编辑项目
+  switch x_nSelect
+    //X
+    case 0
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],prd:pDemo[nSelected].trsf.x,x_nSelect)
+      endIf
+    break
+    //Y
+    case 1
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],prd:pDemo[nSelected].trsf.y,x_nSelect)
+      endIf
+    break
+    //Z
+    case 2
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],prd:pDemo[nSelected].trsf.z,x_nSelect)
+      endIf
+    break
+    //rx
+    case 3
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],prd:pDemo[nSelected].trsf.rx,x_nSelect)
+      endIf
+    break
+    //ry
+    case 4
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],prd:pDemo[nSelected].trsf.ry,x_nSelect)
+      endIf
+    break
+    //rz
+    case 5
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],prd:pDemo[nSelected].trsf.rz,x_nSelect)
+      endIf
+    break
+    //PIn1
+    case 6
+      if x_nKey==270
+        call SparePoint:setPoint(sListItemValue[x_nSelect])
+        call SparePoint:start()
+        call SparePoint:getPoint(sListItemValue[x_nSelect])
+        x_sItem="PIn1     :"+sListItemValue[x_nSelect]
+      endIf
+      
+    break
+    //PIn2
+    case 7
+      if x_nKey==270
+        call SparePoint:setPoint(sListItemValue[x_nSelect])
+        call SparePoint:start()
+        call SparePoint:getPoint(sListItemValue[x_nSelect])
+        x_sItem="PIn2     :"+sListItemValue[x_nSelect]
+      endIf
+    break
+    //POut1
+    case 8
+      if x_nKey==270
+        call SparePoint:setPoint(sListItemValue[x_nSelect])
+        call SparePoint:start()
+        call SparePoint:getPoint(sListItemValue[x_nSelect])
+        x_sItem="POut     :"+sListItemValue[x_nSelect]
+      endIf
+    break
+    //IO1
+    case 9
+      if x_nKey==270
+        call IO:setIO(sListItemValue[x_nSelect])
+        call IO:Main(1)
+        call IO:getIO(sListItemValue[x_nSelect])
+        //
+        x_sItem="IO1      :"+sListItemValue[x_nSelect]
+      endIf
+      
+    break
+    //IO2
+    case 10
+      if x_nKey==270
+        call IO:setIO(sListItemValue[x_nSelect])
+        call IO:Main(1)
+        call IO:getIO(sListItemValue[x_nSelect])
+        //
+        x_sItem="IO2      :"+sListItemValue[x_nSelect]
+      endIf
+    break
+    //delay
+    case 11
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],l_nTemp,x_nSelect)
+      endIf
+    break
+  endSwitch
+  if x_nKey==270
+    bUserRefresh=true
+    bListRefresh=true
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

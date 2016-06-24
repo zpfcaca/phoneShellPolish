@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="InitBelt" access="private" >
+    <Code><![CDATA[begin
+  //砂带信息初始化
+  nPYC=0
+  nPY=0
+  nPYtest=0
+  popUpMsg("砂带初始化完成!")
+  logMsg("砂带初始化完成!")
+
+end]]></Code>
+  </Program>
+</Programs>

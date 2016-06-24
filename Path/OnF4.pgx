@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="OnF4">
+    <Locals>
+      <Local name="l_sProperty" type="string" xsi:type="array" size="2" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //调用tool or frame library
+  l_sProperty[0]="工具"
+  l_sProperty[1]="坐标系"
+  call user:SetProerty("",26,9,6,2,l_sProperty,l_sItem)
+  if l_sItem=="工具"
+    call Tool:setTool(prd:sToolName)
+    call Tool:Main(1)
+    call Tool:getTool(prd:sToolName,prd:tTool)
+  elseIf l_sItem=="坐标系"
+    call Frame:SetFrame(prd:sFrameName)
+    call Frame:Main(1)
+    call Frame:getFrame(prd:sFrameName,prd:fFrmMaster)
+  endIf
+  bUserRefresh=bListRefresh=true
+end]]></Code>
+  </Program>
+</Programs>

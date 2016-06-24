@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="InsertPath">
+    <Locals>
+      <Local name="l_sProperty" type="string" xsi:type="array" size="3" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  l_sProperty[0]="轨迹"
+  l_sProperty[1]="码垛盘"
+  l_sProperty[2]="离散点"
+  call user:SetProerty("",20,8,6,3,l_sProperty,l_sItem)
+  
+  if l_sItem==l_sProperty[0]
+    //读取路径
+    call readFileList(sFolder,sFileList)
+    call selectFile(sDeli,sFileList)
+    //
+    call selectPath() 
+  elseIf l_sItem==l_sProperty[1]
+    l_sProperty[0]="pallet1"
+    l_sProperty[1]="pallet2"
+    call user:SetProerty("",20,9,8,2,l_sProperty,l_sItem)
+    if l_sItem!=""
+      if sPathList[0]!="pallet1" and sPathList[0]!="pallet2"
+        insert(sPathList[0])
+        sPathList[0]=l_sItem
+      else
+        if sPathList[size(sPathList)-1]!="pallet1" and sPathList[size(sPathList)-1]!="pallet2"
+          insert(sPathList[size(sPathList)])
+          sPathList[size(sPathList)-1]=l_sItem
+        else
+          popUpMsg("码垛盘最多两个!")
+        endIf
+      endIf
+      
+    endIf
+  else
+    call SparePoint:setPoint("")
+    call SparePoint:start()
+    call SparePoint:getPoint(l_sItem)
+    //popUpMsg(l_sItem)
+    if l_sItem!=""
+      if sPathList[nSelected]!=""
+        nSelected=nSelected+1
+        insert(sPathList[nSelected])
+        sPathList[nSelected]=l_sItem
+      else
+        sPathList[nSelected]=l_sItem
+      endIf
+      
+    endIf
+    endIf
+  
+  //
+end]]></Code>
+  </Program>
+</Programs>

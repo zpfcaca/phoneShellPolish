@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="getPtPara">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sPtPara" type="string" xsi:type="element" />
+      <Parameter name="x_sOutPtpara" type="string" xsi:type="array" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_nRes" type="num" xsi:type="array" size="1" />
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //对参数x_sPtPara进行解析，得到相应信息
+  //x_sPtPara结构：p1/p2/IO1/IO2/0.1
+  //若没有，使用-1代替
+  call PublicProg:SplitChar(l_nRes,x_sPtPara,"/",x_sOutPtpara)
+ 
+end]]></Code>
+  </Program>
+</Programs>

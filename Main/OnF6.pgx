@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="OnF6">
+    <Locals>
+      <Local name="l_sProperty" type="string" xsi:type="array" size="4" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  l_sProperty[0]="工具"
+  l_sProperty[1]="坐标系"
+  l_sProperty[2]="安全点"
+  l_sProperty[3]="可用点"
+  call user:SetProerty("",26,7,6,4,l_sProperty,l_sItem)
+  if l_sItem=="工具"
+    Tool:libLoad("Tool")
+    call Tool:Main(0)
+    Tool:$libClose()
+  elseIf l_sItem=="坐标系"
+    Frame:libLoad("Frame")
+    call Frame:start()
+    Frame:$libClose()
+  elseIf l_sItem=="安全点"
+    Home:libLoad("Home")
+    call Home:start()
+    Home:$libClose()
+  else
+    SparePoint:libLoad("SparePoint")
+    call SparePoint:start()
+    SparePoint:$libClose()
+  endIf
+  bUserRefresh=true
+end]]></Code>
+  </Program>
+</Programs>

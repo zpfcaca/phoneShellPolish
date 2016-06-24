@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="OnF3" access="private" >
+    <Code><![CDATA[begin
+  //
+  switch nPage
+    case 0
+      pdemo[nSelected]=here(t2,frmaster)
+    break
+    case 1
+
+    break
+  endSwitch
+end]]></Code>
+  </Program>
+</Programs>

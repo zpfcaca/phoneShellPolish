@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="RefreshList" access="private" >
+    <Locals>
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  if bListRefresh
+    switch nPage
+      case 0
+        resize(sList,1,2)
+        for l_ni=0 to 1
+          sList[l_ni]="pallet"+toString("",l_ni+1)
+        endFor
+      break
+
+      case 1
+
+      break
+    endSwitch
+  endIf
+
+end]]></Code>
+  </Program>
+</Programs>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Data/2">
+  <Datas>
+    <Data name="fUserFrame" access="public" xsi:type="array" type="frame" size="1">
+      <Value key="0" fatherId="world[0]" />
+    </Data>
+    <Data name="jtPark" access="public" xsi:type="array" type="jointRx" size="1">
+      <Value key="0" j1="-90" j2="-20" j3="140" j5="-60" j6="178" />
+    </Data>
+    <Data name="ptRoutingPath" access="public" xsi:type="array" type="jointRx" size="1">
+      <Value key="0" j1="10.546" j2="44.21" j3="63.432" j4="13.525" j5="70.04" j6="120.724" />
+    </Data>
+    <Data name="mNomSpeed" access="public" xsi:type="array" type="mdesc" size="1">
+      <Value key="0" blend="off" />
+    </Data>
+    <Data name="mdJointBlend" access="public" xsi:type="array" type="mdesc" size="1">
+      <Value key="0" accel="250" decel="150" leave="1" reach="1" />
+    </Data>
+    <Data name="mdLineBlend" access="public" xsi:type="array" type="mdesc" size="1">
+      <Value key="0" accel="80" vel="60" decel="50" rmax="9999" tmax="100" leave="2" reach="2" />
+    </Data>
+    <Data name="tTool" access="public" xsi:type="array" type="tool" size="1">
+      <Value key="0" x="485" y="70" z="-90.5" rx="5" rz="-92.998" fatherId="flange[0]" ioLink="valve1" />
+    </Data>
+  </Datas>
+</Database>

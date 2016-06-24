@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://www.staubli.com/robotics/VAL3/Project/3" >
+  <Parameters version="s7.8" stackSize="5000" millimeterUnit="true" />
+  <Programs>
+    <Program file="CalOffset.pgx" />
+    <Program file="CheckRobPos.pgx" />
+    <Program file="EnterPageKey.pgx" />
+    <Program file="Init.pgx" />
+    <Program file="InitBelt.pgx" />
+    <Program file="JTP.pgx" />
+    <Program file="Main.pgx" />
+    <Program file="MainKey.pgx" />
+    <Program file="Message.pgx" />
+    <Program file="Motion.pgx" />
+    <Program file="MoveToPoint.pgx" />
+    <Program file="Offset.pgx" />
+    <Program file="OnF1.pgx" />
+    <Program file="OnF2.pgx" />
+    <Program file="OnF3.pgx" />
+    <Program file="OnF4.pgx" />
+    <Program file="OnF5.pgx" />
+    <Program file="OnF6.pgx" />
+    <Program file="OnF7.pgx" />
+    <Program file="OnF8.pgx" />
+    <Program file="Page.pgx" />
+    <Program file="Refresh.pgx" />
+    <Program file="RefreshBelt.pgx" />
+    <Program file="RefreshList.pgx" />
+    <Program file="RefreshPage.pgx" />
+    <Program file="killAllTask.pgx" />
+    <Program file="madol.pgx" />
+    <Program file="start.pgx" />
+    <Program file="stop.pgx" />
+    <Program file="takestop.pgx" />
+  </Programs>
+  <Database>
+    <Data file="Shell.dtx" />
+  </Database>
+  <Libraries>
+    <Library alias="A130" path="Disk://A150/A150.pjx" autoload="true" password="" />
+    <Library alias="user" path="Disk://userPage/USERPAGE.pjx" autoload="true" password="" />
+  </Libraries>
+  <Types>
+  </Types>
+</Project>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="Save">
+    <Locals>
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  
+  switch nPage
+    //产品
+    case 0
+      resize(PublicData:sPrd,1,size(sPrd))
+      for l_ni=0 to size(sPrd)-1
+        PublicData:sPrd[l_ni]=sPrd[l_ni]
+      endFor
+      //
+      resize(PublicData:sProductList,1,size(sProductList))
+      for l_ni=0 to size(sList)-1
+        PublicData:sProductList[l_ni]=sProductList[l_ni]
+      endFor
+      PublicData:libSave()
+      popUpMsg("保存成功!")
+    break
+    //每一个产品里的路径
+    case 1
+      //产品保存
+      resize(PublicData:sPrd,1,size(sPrd))
+      for l_ni=0 to size(sPrd)-1
+        PublicData:sPrd[l_ni]=sPrd[l_ni]
+      endFor
+      //
+      resize(PublicData:sProductList,1,size(sProductList))
+      sProductList[nPrdIndex]=sList[0]
+      for l_ni=1 to size(sList)-1
+        sProductList[nPrdIndex]=sProductList[nPrdIndex]+"/"+sList[l_ni]
+      endFor
+      PublicData:sProductList[nPrdIndex]=sProductList[nPrdIndex]
+      PublicData:libSave()
+      popUpMsg("保存成功!")
+    break
+  endSwitch
+end]]></Code>
+  </Program>
+</Programs>

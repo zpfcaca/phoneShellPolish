@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="Control">
+    <Code><![CDATA[begin
+  //
+  while true
+    //急停按下：结束立即结束
+    if esStatus()==2
+      PublicData:sStatus="Estop"
+      call StopMotion()
+      bExit=true
+      return
+    endIf
+    //endstop:单循环结束停止
+    if IO:diEndStop==true
+      PublicData:sStatus="endstop"
+      wait(IO:diEndStop==false)
+    endIf
+    
+    //start/resume
+    if IO:diStart==true
+      //
+      if PublicData:sStatus=="stop"
+        PublicData:sStatus="run"
+        enablePower()
+      elseIf PublicData:sStatus=="pause"
+        PublicData:sStatus="run"
+        restartMove()
+      elseIf PublicData:sStatus=="run"
+        PublicData:sStatus="pause"
+        stopMove()
+       endIf
+      wait(IO:diStart==false)
+    endIf
+    delay(0)
+  endWhile
+  
+end]]></Code>
+  </Program>
+</Programs>

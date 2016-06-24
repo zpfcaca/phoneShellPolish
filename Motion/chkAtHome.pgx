@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="chkAtHome">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_bIsHome" type="bool" xsi:type="element" use="reference" />
+    </Parameters>
+    <Code><![CDATA[begin
+  //判读机器人是否在安全位置
+  if abs(PublicData:jHome)<{0.1,0.1,0.1,0.1,0.1,0.1}
+    popUpMsg("机器人安全位置：6个轴都不能为零.")
+    x_bIsHome=false
+    return
+  endIf
+
+  if abs(herej()-PublicData:jHome)>{0.1,0.1,0.1,0.1,0.1,0.1}
+    x_bIsHome=false
+    popUpMsg("机器人不在安全位置。")
+  else
+    x_bIsHome=true
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

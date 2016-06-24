@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://www.staubli.com/robotics/VAL3/Project/3">
+  <Parameters version="s7.8.3" stackSize="5000" millimeterUnit="true" />
+  <Programs>
+    <Program file="AdvanceSingal.pgx" />
+    <Program file="AllMotion.pgx" />
+    <Program file="chkAtHome.pgx" />
+    <Program file="CloseSingnal.pgx" />
+    <Program file="Control.pgx" />
+    <Program file="loadPath.pgx" />
+    <Program file="MainKey.pgx" />
+    <Program file="Message.pgx" />
+    <Program file="MotionPage.pgx" />
+    <Program file="OnF1.pgx" />
+    <Program file="OnF2.pgx" />
+    <Program file="OnF3.pgx" />
+    <Program file="OnF4.pgx" />
+    <Program file="OnF5.pgx" />
+    <Program file="OnF6.pgx" />
+    <Program file="OnF7.pgx" />
+    <Program file="OnF8.pgx" />
+    <Program file="OpenSingnal.pgx" />
+    <Program file="Refresh2.pgx" />
+    <Program file="RefreshBelt.pgx" />
+    <Program file="RefreshList.pgx" />
+    <Program file="RefreshPage.pgx" />
+    <Program file="sendInform.pgx" />
+    <Program file="SimuMain.pgx" />
+    <Program file="SingleMotion.pgx" />
+    <Program file="start.pgx" />
+    <Program file="StartMotion.pgx" />
+    <Program file="stop.pgx" />
+    <Program file="StopMotion.pgx" />
+    <Program file="WholeMotion.pgx" />
+  </Programs>
+  <Database>
+    <Data file="Motion.dtx" />
+  </Database>
+  <Libraries>
+    <Library alias="prd" path="Disk://template/normalPath/normalPath.pjx" />
+    <Library alias="PublicData" path="Disk://PublicData/PublicData.pjx" />
+    <Library alias="Tool" path="Disk://Tool/Tool.pjx" />
+    <Library alias="Frame" path="Disk://Frame/Frame.pjx" />
+    <Library alias="PublicProg" path="Disk://PublicProg/PublicProg.pjx" />
+    <Library alias="IO" path="Disk://IO/IO.pjx" />
+    <Library alias="SparePonit" path="Disk://SparePoint/SparePoint.pjx" />
+    <Library alias="user" path="Disk://userPage/USERPAGE.pjx" />
+    <Library alias="Pallet" path="Disk://Pallet/Pallet.pjx" />
+  </Libraries>
+</Project>

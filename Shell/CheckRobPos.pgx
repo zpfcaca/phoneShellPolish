@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="CheckRobPos" access="private" >
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1" >
+      <Parameter name="x_jRef" type="joint" use="value" xsi:type="element" dimensions="1" />
+      <Parameter name="x_bStatus" type="bool" use="reference" xsi:type="element" dimensions="1" />
+    </Parameters>
+    <Locals>
+      <Local name="l_j" type="joint" xsi:type="array" size="1" />
+      <Local name="l_nErr" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //判断当前机器人的位置状态
+  //x_jRef:参考位置
+  //x_bStatus:
+  //--true:机器人在x_jRef
+  //--false:机器人不在x_jRef
+  l_nErr=0.05
+  l_j=herej()
+  x_bStatus=false
+  if abs(l_j-x_jRef)<{l_nErr,l_nErr,l_nErr,l_nErr,l_nErr,l_nErr}
+    x_bStatus=true
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

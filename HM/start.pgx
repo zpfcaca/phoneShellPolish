@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="start">
+    <Code><![CDATA[begin
+  //运行标记和暂停标记重置
+  bruning=false
+  bPause=false
+  //创建暂停任务
+  taskCreate "STOPMVE",100,SMOVE()
+  //单循环停止任务
+  taskCreate "sgd",100,takestop()
+  //--------------------------------------------------
+  //用户手动选择b0转点
+  if b0==true
+    for ninttool=0 to 9
+      //工具值重置
+      t2[ninttool].trsf={0,0,0,0,0,0}
+    endFor
+    //转点JOINT TO POINT程序
+    call JTPdemo()
+  endIf
+  //
+  
+  //用户手动激活b1套用已保存的打磨坐标系
+  if b1==true
+    call tooolAndFrame()
+  endIf
+  //用户手动激活b2保存当前所有打磨坐标系
+  if b2==true
+    call SAVEtoolAfranme()
+  endIf
+  //------b3套用旧的码垛坐标系，此功能未写
+  if b3==true
+    call oldmaduofrme()
+  endIf
+  //------b4把现有的码垛坐标系保存进库，此功能未写
+  if b4==true
+    call saveOldframe()
+  endIf
+  //获取当前位置
+  jchack=herej()
+  //比较当前位置
+  wait(jchack==jstart)
+  //等待按钮状态
+  wait(distart==true)
+  wait(distart==false)
+  //运行标记开启，暂停标记false
+  bruning=true
+  bPause=false
+  //上电，远程模式
+  enablePower()
+  //检测上电
+  wait(isPowered()==true)
+  //开始运行码垛以及走轨迹程序
+  while true
+    call madol()
+    waitEndMove()
+  endWhile
+end]]></Code>
+  </Program>
+</Programs>

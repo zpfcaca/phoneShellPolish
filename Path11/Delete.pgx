@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="Delete">
+    <Locals>
+      <Local name="l_sYesNo" type="string" xsi:type="array" size="2" />
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //删除
+  l_sYesNo[0]="是"
+  l_sYesNo[1]="否"
+  switch nPage
+    case 0
+      call user:questionDialog("是否删除此路径?",l_sYesNo,l_i)
+      if l_i==0 or l_i==1
+        if sFileList[nSelected]!=""
+          libDelete(sFolder+sFileList[nSelected])
+          delete(sFileList[nSelected])
+          bListRefresh=true
+        endIf
+      endIf
+    break
+    case 1
+      call user:questionDialog("是否删除此点?",l_sYesNo,l_i)
+      if l_i==0 or l_i==1
+        if sFileList[nSelected]!=""
+          delete(prd:pDemo[nSelected])
+          delete(prd:sPtParameter[nSelected])
+          bListRefresh=true
+        endIf
+      endIf
+    break
+  endSwitch
+  
+  bUserRefresh=true
+end]]></Code>
+  </Program>
+</Programs>

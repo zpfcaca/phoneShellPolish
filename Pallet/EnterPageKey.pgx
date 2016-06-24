@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="EnterPageKey">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_nKey" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_nSelect" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_sItem" type="string" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_nItem" type="num" xsi:type="array" size="1" />
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_nView" type="num" xsi:type="array" size="1" />
+      <Local name="l_sEmpty" type="string" xsi:type="array" size="1" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+      <Local name="l_sStr" type="string" xsi:type="array" size="1" />
+      <Local name="l_sTool" type="string" xsi:type="array" size="1" />
+      <Local name="l_sValue" type="string" xsi:type="array" size="1" />
+      <Local name="l_sYN" type="string" xsi:type="array" size="2" />
+      <Local name="lp" type="point" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  switch x_nSelect
+    case 0
+      if x_nKey==271
+        uPallet[sItem].pO=here(tTool,world)
+        popUpMsg("OK")
+      endIf
+      
+    break
+    case 1
+      if x_nKey==271
+        uPallet[sItem].pO=here(tTool,world)
+        popUpMsg("OK")
+      endIf
+      
+    break
+    case 2
+      if x_nKey==271
+        uPallet[sItem].pO=here(tTool,world)
+        popUpMsg("OK")
+      endIf
+      
+    break
+    
+    case 3
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],uPallet[sItem].ndX,x_nSelect)
+      endIf
+    break
+    case 4
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],uPallet[sItem].ndY,x_nSelect)
+      endIf
+    break
+    
+    case 5
+      if x_nKey==271
+        if setFrame(pPonit[0],pPonit[1],pPonit[2],fFrame)==0
+          uPallet[sItem].pStart=here(tTool,fFrame)
+          popUpMsg("OK")
+        else
+          uPallet[sItem].pStart=here(tTool,fFrame)
+          popUpMsg("请先记录原点，X点和Y点！")
+        endIf
+      endIf
+    break
+    
+  endSwitch
+  //
+  if x_nKey==272
+    call Tool:Main(1)
+    call Tool:getTool(l_sTool,tTool)
+    if l_sTool!=""
+      uPallet[sItem].sToolName=l_sTool
+      sParameter[6]="工具"
+      sListItemValue[6]=uPallet[sItem].sToolName
+      call user:strlength(sParameter[6],user:nBottomX/2)
+      l_sValue=sListItemValue[6]
+      call user:strlength(l_sValue,user:nBottomX/2+1)
+      sParameter[6]=sParameter[6]+":"+l_sValue
+    endIf
+    if x_nKey==270 or x_nKey==272
+      bUserRefresh=true
+      bListRefresh=true
+    endIf
+  endIf
+  
+end]]></Code>
+  </Program>
+</Programs>

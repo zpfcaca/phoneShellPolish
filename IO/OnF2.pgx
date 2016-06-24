@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="OnF2">
+    <Code><![CDATA[begin
+  //
+  if find(sItem,"O")!=-1
+    if dOut[sIOName]==true
+      dOut[sIOName]=false
+    endIf
+  else
+    popUpMsg("对输入量无效。")
+  endIf
+  
+  
+end]]></Code>
+  </Program>
+</Programs>

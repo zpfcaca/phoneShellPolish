@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="WholeMotion" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sPrdName" type="string" xsi:type="element" />
+    </Parameters>
+    <Locals>
+      <Local name="l_nWorkMode" type="num" xsi:type="array" size="1" />
+      <Local name="l_nStatus" type="num" xsi:type="array" size="1" />
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+      <Local name="l_nIndex" type="num" xsi:type="array" size="1" />
+      <Local name="l_nj" type="num" xsi:type="array" size="1" />
+      <Local name="l_nk" type="num" xsi:type="array" size="1" />
+      <Local name="l_nCount" type="num" xsi:type="array" size="1" />
+      <Local name="l_nPalletCount" type="num" xsi:type="array" size="1" />
+      <Local name="l_sPalletName" type="string" xsi:type="array" size="2" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  while true
+    l_nWorkMode=workingMode(l_nStatus)
+    if PublicData:bSimulaiton
+      //手动模式
+      if l_nWorkMode!=1
+        popUpMsg("模拟：切换到手动模式")
+        wait(workingMode(l_nStatus)==1)
+      endIf
+    else
+      //自动模式
+      if l_nWorkMode!=4
+        popUpMsg("生产：切换到远程模式")
+        wait(workingMode(l_nStatus)==4)
+      endIf
+    endIf
+    
+    //判断安全位置
+    call chkAtHome(l_bRes)
+    if !l_bRes
+      return
+    endIf
+    //等待启动
+    call Message("等待启动",true)
+    wait(IO:diStart==true)
+    //机器人上电
+    wait(isPowered()==true)
+    call Message("运动中...",true)
+    //
+    //
+    for l_ni=0 to size(PublicData:sPrd)-1
+      if x_sPrdName==PublicData:sPrd[l_ni]
+        l_nIndex=l_ni
+        l_ni=size(PublicData:sPrd)+1
+      endIf
+    endFor
+    
+    call PublicProg:SplitChar(l_nRes,PublicData:sProductList,"/",sProductList)
+    
+    //寻找pallet的个数,最多两个pallet
+    l_nPalletCount=0
+    for l_ni=0 to size(sProductList)-1
+      if find(sProductList[l_ni],"pallet")>-1
+        l_sPalletName[l_nPalletCount]=sProductList[l_ni]
+        l_nPalletCount=l_nPalletCount+1
+      endIf
+    endFor
+    //
+    call AdvanceSingal()
+    
+    //
+    if l_nPalletCount==0
+      //no pallet
+      l_ni=0
+      while find(sProductList[l_ni],"P")>-1
+        if find(sProductList[l_ni+1],"P")>-1
+          pSparePoint.trsf=SparePonit:pPoint[sProductList[l_ni]].trsf
+          pSparePoint.config=cConfig
+          movej(pSparePoint,flange,PublicData:mFast)
+        else
+          pSparePoint.trsf=SparePonit:pPoint[sProductList[l_ni]].trsf
+          pSparePoint.config=cConfig
+          movej(appro(pSparePoint,{0,0,20,0,0,0}),flange,PublicData:mFast)
+          waitEndMove()
+          //
+          call OpenSingnal()
+          movel(pSparePoint,flange,PublicData:mSlow)
+          waitEndMove()
+          movel(appro(pSparePoint,{0,0,20,0,0,0}),flange,PublicData:mSlow)
+        endIf
+        l_ni=l_ni+1
+      endWhile
+      
+      //traj
+      while l_ni<size(sProductList) and find(sProductList[l_ni],"P")<0
+        
+        call SingleMotion(sProductList[l_ni],false,l_ni)
+        PublicData:nCompenCount[l_ni]=PublicData:nCompenCount[l_ni]+1
+        l_ni=l_ni+1
+      endWhile
+      //
+      
+      while l_ni<size(sProductList)
+        pSparePoint.trsf=SparePonit:pPoint[sProductList[l_ni]].trsf
+        pSparePoint.config=cConfig
+        movej(pSparePoint,flange,PublicData:mFast)
+        l_ni=l_ni+1
+        delay(0)
+      endWhile
+        waitEndMove()
+      call CloseSingnal()
+      movej(PublicData:jHome,flange,PublicData:mHome)
+      waitEndMove()
+      
+    elseIf l_nPalletCount==1
+      //one pallet
+      for l_nk=0 to Pallet:uPallet[l_sPalletName[0]].ndX-1
+        for l_nj=0 to Pallet:uPallet[l_sPalletName[0]].ndY-1
+          //
+          l_ni=0
+          while find(sProductList[l_ni],"P")>-1
+            pSparePoint.trsf=SparePonit:pPoint[sProductList[l_ni]].trsf
+            pSparePoint.config=cConfig
+            movej(pSparePoint,flange,PublicData:mFast)
+            l_ni=l_ni+1
+          endWhile
+          //
+          fFrame.trsf=Pallet:uPallet[l_sPalletName[0]].fFrame.trsf
+          tTool.trsf=Tool:tTool[Pallet:uPallet[l_sPalletName[0]].sToolName].trsf
+          pDemo.trsf=Pallet:uPallet[l_sPalletName[0]].pStart.trsf
+          pDemo.config=cConfig
+          pDemo=compose(pDemo,fFrame,{Pallet:uPallet[l_sPalletName[0]].ndX*l_nk,Pallet:uPallet[l_sPalletName[0]].ndY*l_nj,0,0,0,0})
+          movej(appro(pDemo,{0,0,20,0,0,0}),tTool,PublicData:mMiddleFast)
+          waitEndMove()
+          //添加信号
+          call OpenSingnal()
+          movel(pDemo,tTool,PublicData:mSlow)
+          waitEndMove()
+          movel(appro(pDemo,{0,0,20,0,0,0}),tTool,PublicData:mSlow)
+          //
+          //traj
+          while l_ni<size(sProductList) and find(sProductList[l_ni],"P")<0
+            //
+            call SingleMotion(sProductList[l_ni],false,l_ni)
+            l_ni=l_ni+1
+          endWhile
+          
+          while l_ni<size(sProductList)
+            pSparePoint.trsf=SparePonit:pPoint[sProductList[l_ni]].trsf
+            pSparePoint.config=cConfig
+            movej(pSparePoint,flange,PublicData:mFast)
+            l_ni=l_ni+1
+            delay(0)
+          endWhile
+          waitEndMove()
+          call CloseSingnal()
+          movej(PublicData:jHome,flange,PublicData:mHome)
+          waitEndMove()
+        endFor
+      endFor
+    elseIf l_nPalletCount==2
+      //two pallet
+    endIf
+    if PublicData:sStatus=="endstop"
+      disablePower()
+    endIf
+    PublicData:sStatus="stop"
+    delay(0)
+  endWhile  
+end]]></Code>
+  </Program>
+</Programs>

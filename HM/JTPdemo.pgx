@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="JTPdemo">
+    <Locals>
+      <Local name="l_nj" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //根据用户选择bA[0至9]，选择性转换单个或多个程序的joint点并使用
+  //---------------------------------------------------------------------------0
+  nmaster=0
+  if bA[0]==true
+    //加载动态库     disk://+用户输入程序名称
+    call loadmaster0(sFolder+sFileName[0])
+    delay(0)
+    resize(nPeak0,1,1)
+    l_nj=0
+    //setFrame(pt1,pt2,pt3,frmaster)
+    for nmaster=0 to nsize[0]-1
+      pdemo0[nmaster]=jointToPoint(t2[0],frmaster[0],master:ptRoutingPath[nmaster])
+      if nmaster!=0 and abs(master:ptRoutingPath[nmaster-1].j6-master:ptRoutingPath[nmaster].j6)>50
+        //如果超出50，则把nmaster的数据赋值到nPeak[l_nj]
+        nPeak0[l_nj]=nmaster
+        //l_nj自加1
+        l_nj=l_nj+1
+        delay(0)
+        //插入nPwak一个个数，变成可l_nj[l_nj+1]
+        insert(nPeak0[l_nj])
+      endIf
+    endFor
+    //多了一个，删除
+    // delete(nPeak0[l_nj])
+  endIf
+  //-------------------------------------------------------------------------1
+  if bA[1]==true
+    nmaster=0
+    call loadmaster1(sFolder+sFileName[1])
+    delay(0)
+    resize(nPeak1,1,1)
+    l_nj=0
+    for nmaster=0 to nsize[1]-1
+      pdemo1[nmaster]=jointToPoint(t2[1],frmaster[1],master:ptRoutingPath[nmaster])
+      if nmaster!=0 and abs(master:ptRoutingPath[nmaster-1].j6-master:ptRoutingPath[nmaster].j6)>50
+        //如果超出50，则把nmaster的数据赋值到nPeak[l_nj]
+        nPeak1[l_nj]=nmaster
+        //l_nj自加1
+        l_nj=l_nj+1
+        delay(0)
+        //插入nPwak一个个数，变成可l_nj[l_nj+1]
+        insert(nPeak1[l_nj])
+      endIf
+    endFor
+    //多了一个，删除
+    // delete(nPeak1[l_nj])
+  endIf
+  //-------------------------------------------------------------------------------2
+  if bA[2]==true
+    nmaster=0
+    call loadmaster2(sFolder+sFileName[2])
+    delay(0)
+    resize(nPeak2,1,1)
+    l_nj=0
+    //setFrame(pt1,pt2,pt3,frmaster)
+    for nmaster=0 to nsize[2]-1
+      pdemo2[nmaster]=jointToPoint(t2[2],frmaster[2],master:ptRoutingPath[nmaster])
+      if nmaster!=0 and abs(master:ptRoutingPath[nmaster-1].j6-master:ptRoutingPath[nmaster].j6)>50
+        //如果超出50，则把nmaster的数据赋值到nPeak[l_nj]
+        nPeak2[l_nj]=nmaster
+        //l_nj自加1
+        l_nj=l_nj+1
+        delay(0)
+        //插入nPwak一个个数，变成可l_nj[l_nj+1]
+        insert(nPeak2[l_nj])
+      endIf
+    endFor
+    //多了一个，删除
+    // delete(nPeak2[l_nj])
+  endIf
+  //------------------------------------------------------------------3
+  if bA[3]==true
+    nmaster=0
+    call loadmaster3(sFolder+sFileName[3])
+    delay(0)
+    resize(nPeak3,1,1)
+    l_nj=0
+    //setFrame(pt1,pt2,pt3,frmaster)
+    for nmaster=0 to nsize[3]-1
+      pdemo3[nmaster]=jointToPoint(t2[3],frmaster[3],master:ptRoutingPath[nmaster])
+      if nmaster!=0 and abs(master:ptRoutingPath[nmaster-1].j6-master:ptRoutingPath[nmaster].j6)>50
+        //如果超出50，则把nmaster的数据赋值到nPeak[l_nj]
+        nPeak3[l_nj]=nmaster
+        //l_nj自加1
+        l_nj=l_nj+1
+        delay(0)
+        //插入nPwak一个个数，变成可l_nj[l_nj+1]
+        insert(nPeak3[l_nj])
+      endIf
+    endFor
+    //多了一个，删除
+    // delete(nPeak3[l_nj])
+  endIf
+  //---------------------------------------------------------------------------4
+  if bA[4]==true
+    nmaster=0
+    call loadmaster4(sFolder+sFileName[4])
+    delay(0)
+    resize(nPeak4,1,1)
+    l_nj=0
+    //setFrame(pt1,pt2,pt3,frmaster)
+    for nmaster=0 to nsize[4]-1
+      pdemo4[nmaster]=jointToPoint(t2[4],frmaster[4],master:ptRoutingPath[nmaster])
+      if nmaster!=0 and abs(master:ptRoutingPath[nmaster-1].j6-master:ptRoutingPath[nmaster].j6)>50
+        //如果超出50，则把nmaster的数据赋值到nPeak[l_nj]
+        nPeak4[l_nj]=nmaster
+        //l_nj自加1
+        l_nj=l_nj+1
+        delay(0)
+        //插入nPwak一个个数，变成可l_nj[l_nj+1]
+        insert(nPeak4[l_nj])
+      endIf
+    endFor
+    //多了一个，删除
+    // delete(nPeak4[l_nj])
+  endIf
+  //-----------------------------------------------------------------------5
+  if bA[5]==true
+    nmaster=0
+    call loadmaster5(sFolder+sFileName[5])
+    delay(0)
+    resize(nPeak5,1,1)
+    l_nj=0
+    //setFrame(pt1,pt2,pt3,frmaster)
+    for nmaster=0 to nsize[5]-1
+      pdemo5[nmaster]=jointToPoint(t2[5],frmaster[5],master:ptRoutingPath[nmaster])
+      if nmaster!=0 and abs(master:ptRoutingPath[nmaster-1].j6-master:ptRoutingPath[nmaster].j6)>50
+        //如果超出50，则把nmaster的数据赋值到nPeak[l_nj]
+        nPeak5[l_nj]=nmaster
+        //l_nj自加1
+        l_nj=l_nj+1
+        delay(0)
+        //插入nPwak一个个数，变成可l_nj[l_nj+1]
+        insert(nPeak5[l_nj])
+      endIf
+    endFor
+    //多了一个，删除
+    // delete(nPeak5[l_nj])
+  endIf
+  //-------------------------------------------------------------------6
+  if bA[6]==true
+    nmaster=0
+    call loadmaster6(sFolder+sFileName[6])
+    delay(0)
+    resize(nPeak6,1,1)
+    l_nj=0
+    //setFrame(pt1,pt2,pt3,frmaster)
+    for nmaster=0 to nsize[6]-1
+      pdemo6[nmaster]=jointToPoint(t2[6],frmaster[6],master:ptRoutingPath[nmaster])
+      if nmaster!=0 and abs(master:ptRoutingPath[nmaster-1].j6-master:ptRoutingPath[nmaster].j6)>50
+        //如果超出50，则把nmaster的数据赋值到nPeak[l_nj]
+        nPeak6[l_nj]=nmaster
+        //l_nj自加1
+        l_nj=l_nj+1
+        delay(0)
+        //插入nPwak一个个数，变成可l_nj[l_nj+1]
+        insert(nPeak6[l_nj])
+      endIf
+    endFor
+    //多了一个，删除
+    //delete(nPeak6[l_nj])
+  endIf
+  //-------------------------------------------------------------------------------7
+  if bA[7]==true
+    nmaster=0
+    call loadmaster7(sFolder+sFileName[7])
+    delay(0)
+    resize(nPeak7,1,1)
+    l_nj=0
+    //setFrame(pt1,pt2,pt3,frmaster)
+    for nmaster=0 to nsize[7]-1
+      pdemo7[nmaster]=jointToPoint(t2[7],frmaster[7],master:ptRoutingPath[nmaster])
+      if nmaster!=0 and abs(master:ptRoutingPath[nmaster-1].j6-master:ptRoutingPath[nmaster].j6)>50
+        //如果超出50，则把nmaster的数据赋值到nPeak[l_nj]
+        nPeak7[l_nj]=nmaster
+        //l_nj自加1
+        l_nj=l_nj+1
+        //插入nPwak一个个数，变成可l_nj[l_nj+1]
+        insert(nPeak7[l_nj])
+        delay(0)
+      endIf
+    endFor
+    //多了一个，删除
+    // delete(nPeak7[l_nj])
+  endIf
+  //----------------------------------------------------------------------------------8
+  if bA[8]==true
+    nmaster=0
+    call loadmaster8(sFolder+sFileName[8])
+    delay(0)
+    resize(nPeak8,1,1)
+    l_nj=0
+    //setFrame(pt1,pt2,pt3,frmaster)
+    for nmaster=0 to nsize[8]-1
+      pdemo8[nmaster]=jointToPoint(t2[8],frmaster[8],master:ptRoutingPath[nmaster])
+      if nmaster!=0 and abs(master:ptRoutingPath[nmaster-1].j6-master:ptRoutingPath[nmaster].j6)>50
+        //如果超出50，则把nmaster的数据赋值到nPeak[l_nj]
+        nPeak8[l_nj]=nmaster
+        //l_nj自加1
+        l_nj=l_nj+1
+        //插入nPwak一个个数，变成可l_nj[l_nj+1]
+        insert(nPeak8[l_nj])
+        delay(0)
+      endIf
+    endFor
+    //多了一个，删除
+    // delete(nPeak8[l_nj])
+  endIf
+  //------------------------------------------------------------------------------9
+  if bA[9]==true
+    nmaster=0
+    call loadmaster9(sFolder+sFileName[9])
+    delay(0)
+    resize(nPeak9,1,1)
+    l_nj=0
+    //setFrame(pt1,pt2,pt3,frmaster)
+    for nmaster=0 to nsize[9]-1
+      pdemo9[nmaster]=jointToPoint(t2[9],frmaster[9],master:ptRoutingPath[nmaster])
+      if nmaster!=0 and abs(master:ptRoutingPath[nmaster-1].j6-master:ptRoutingPath[nmaster].j6)>50
+        //如果超出50，则把nmaster的数据赋值到nPeak[l_nj]
+        nPeak9[l_nj]=nmaster
+        //l_nj自加1
+        l_nj=l_nj+1
+        delay(0)
+        //插入nPwak一个个数，变成可l_nj[l_nj+1]
+        insert(nPeak9[l_nj])
+      endIf
+    endFor
+    //多了一个，删除
+    // delete(nPeak9[l_nj])
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

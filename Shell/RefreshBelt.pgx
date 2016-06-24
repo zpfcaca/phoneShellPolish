@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="RefreshBelt" access="private" >
+    <Code><![CDATA[begin
+  //
+  gotoxy(20,1)
+  put("--砂带信息--")
+  gotoxy(20,3)
+  put("补偿量:"+toString(".3",nPYtest)+"  ")
+  gotoxy(20,4)
+  put("补偿次数:"+toString("4",nPYC)+"  ")
+end]]></Code>
+  </Program>
+</Programs>

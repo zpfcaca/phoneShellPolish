@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="Page" access="private" >
+    <Locals>
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  cls()
+  nPage=1
+  bExit=false
+  do
+    call RefreshPage()
+    call RefreshBelt()
+    l_nKey=getKey()
+    call MainKey(l_nKey)
+    delay(0)
+  until bExit
+  bExit=false
+end]]></Code>
+  </Program>
+</Programs>

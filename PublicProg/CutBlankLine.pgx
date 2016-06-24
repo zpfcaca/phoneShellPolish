@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="CutBlankLine" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_nFileId" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_nLine" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_sLine" type="string" xsi:type="element" use="reference" />
+    </Parameters>
+    <Code><![CDATA[begin
+  do
+    x_nLine=$fileGet(x_nFileId,x_sLine,1)
+    if x_nLine<1
+      return
+    endIf
+    call CutSpace(x_sLine,x_sLine)
+    delay(0)
+  until x_sLine!=""
+end]]></Code>
+  </Program>
+</Programs>

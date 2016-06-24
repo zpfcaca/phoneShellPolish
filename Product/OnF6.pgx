@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="OnF6">
+    <Locals>
+      <Local name="l_sProperty" type="string" xsi:type="array" size="2" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  switch nPage
+    case 0
+      l_sProperty[0]="设置"
+      l_sProperty[1]="取消"
+      call user:SetProerty("",26,9,6,2,l_sProperty,l_sItem)
+      if l_sItem==l_sProperty[0]
+        if sItem==""
+          popUpMsg("没有产品")
+        else
+          PublicData:sStartPrd=sItem
+          PublicData:libSave()
+          popUpMsg("选择产品"+sItem+"为自启动")
+          
+        endIf
+      else
+        PublicData:sStartPrd=""
+        PublicData:libSave()
+        popUpMsg("自启动取消")
+      endIf
+      bUserRefresh=bListRefresh=true
+    break
+    case 1
+    break
+  endSwitch
+end]]></Code>
+  </Program>
+</Programs>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="selectPath">
+    <Locals>
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_nSelected" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  nPage=2
+  bUserRefresh=bListRefresh=true
+  sNewPath=""
+  l_nSelected=nSelected
+  do
+    call Refresh()
+    call RefreshList()
+    call user:setList("路径",sList,bUserRefresh,bListRefresh,nSelected,sItem,l_nKey)
+    bUserRefresh=false
+    bListRefresh=false
+    call MainKey(l_nKey)
+    delay(0)
+  until bExit
+  //
+  if sPathList[l_nSelected]!=""
+    if sNewPath!=""
+      insert(sPathList[l_nSelected+1])
+      sPathList[l_nSelected+1]=sNewPath
+    endIf
+  else
+    sPathList[l_nSelected]=sNewPath
+  endIf
+  
+  nPage=1
+  bUserRefresh=bListRefresh=true
+  bExit=false
+end]]></Code>
+  </Program>
+</Programs>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="AllMotion" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sPrd" type="string" xsi:type="element" />
+    </Parameters>
+    <Locals>
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+      <Local name="l_nSize" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  //判断安全位置
+  call chkAtHome(l_bRes)
+  if !l_bRes
+    return
+  endIf
+  //
+  PublicData:sStatus="stop"
+  //正在加工的路径
+  if PublicData:sCurrentPrd!=x_sPrd
+    PublicData:sCurrentPrd=x_sPrd
+    l_ni=0
+    while l_ni<size(sProductList) and find(sProductList[l_ni],"P")<0
+      l_ni=l_ni+1
+    endWhile
+    //初始化计数
+    l_nSize=l_ni
+    resize(PublicData:nCompenCount,1,l_nSize)
+    for l_ni=0 to l_nSize-1
+      PublicData:nCompenCount[l_ni]=0
+    endFor
+  endIf
+  //
+  taskCreate "control",100,Control()
+  taskCreate "motion",100,WholeMotion(x_sPrd)
+  call MotionPage()
+end]]></Code>
+  </Program>
+</Programs>

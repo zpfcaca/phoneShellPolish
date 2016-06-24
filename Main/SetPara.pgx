@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="SetPara">
+    <Locals>
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+      <Local name="l_nSelect" type="num" xsi:type="array" size="1" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_sValue" type="string" xsi:type="array" size="1" />
+      <Local name="l_nRes" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  cls()
+  //获取补偿量列表
+  for l_i=0 to size(PublicData:sPrd)-1
+    if PublicData:sStartPrd==PublicData:sPrd[l_i]
+      call PublicProg:SplitChar(l_nRes,PublicData:sProductList[l_i],"/",sPath)
+      l_i=size(PublicData:sPrd)
+    endIf
+  endFor
+  //无匹配产品
+  if l_i<size(PublicData:sPrd)+1
+    popUpMsg("无启动产品")
+    return
+  else
+    resize(sParameter,1,size(sPath)+1)
+    sParameter[0]="产品"
+    for l_i=1 to size(sParameter)-1
+      sParameter[l_i]=sPath[l_i-1]
+    endFor
+    
+  endIf
+  
+  //
+  resize(sListItemValue,1,size(sParameter))
+  sListItemValue[0]=PublicData:sStartPrd
+  for l_i=1 to size(sParameter)-1
+    if prd:libLoad("Disk://Traj/"+sParameter[l_i])==0
+      sListItemValue[l_i]=toString(".3",prd:nCompDelta)
+    else
+      popUpMsg("产品文件"+PublicData:sStartPrd+"错误："+"路径"+sParameter[l_i])
+      logMsg("产品文件"+PublicData:sStartPrd+"错误："+"路径"+sParameter[l_i])
+      return
+    endIf
+  endFor
+  
+  //
+  for l_i=0 to size(sParameter)-1
+    call user:strlength(sParameter[l_i],user:nBottomX/2)
+    l_sValue=sListItemValue[l_i]
+    call user:strlength(l_sValue,user:nBottomX/2+1)
+    sParameter[l_i]=sParameter[l_i]+":"+l_sValue
+  endFor
+  
+  bUserRefresh=true
+  bListRefresh=true
+  //
+  do
+    if bUserRefresh
+      cls()
+      call user:clear(0,13)
+      call user:typeMenu(8,"确定")
+    endIf
+    call user:setList("",sParameter,bUserRefresh,bListRefresh,l_nSelect,l_sItem,l_nKey)
+    bListRefresh=bUserRefresh=false
+    call EnterPageKey(l_nKey,l_nSelect,sParameter[l_nSelect])
+    delay(0)
+  until l_nKey==255 or l_nKey==278
+  PublicData:libSave()
+  bUserRefresh=true
+end]]></Code>
+  </Program>
+</Programs>

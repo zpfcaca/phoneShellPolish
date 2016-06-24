@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="JTP">
+    <Code><![CDATA[begin
+  //建立坐标系
+  setFrame(pt1,pt2,pt3,frmaster)
+  //数据转换
+  for nmaster=0 to 313
+    pdemo[nmaster]=jointToPoint(t2,frmaster,master:ptRoutingPath[nmaster])
+  endFor
+end]]></Code>
+  </Program>
+</Programs>

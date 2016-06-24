@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="SingleMotion" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sPath" type="string" xsi:type="element" />
+      <Parameter name="x_bSingle" type="bool" xsi:type="element" />
+      <Parameter name="x_nIndex" type="num" xsi:type="element" />
+    </Parameters>
+    <Locals>
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  call loadPath(l_bRes,x_sPath)
+  if !l_bRes
+    return
+  endIf
+  //
+  //
+  if x_bSingle
+    tTool.trsf=prd:tTool.trsf
+    fFrame.trsf=prd:fFrmMaster.trsf
+  else
+    //补偿
+    PublicData:nSumCompen=PublicData:nCompenCount[x_nIndex]*prd:nCompDelta
+    tTool.trsf=prd:tTool.trsf
+    tTool.trsf.z=tTool.trsf.z-PublicData:nSumCompen
+    fFrame.trsf=prd:fFrmMaster.trsf
+  endIf
+  
+  //
+  //
+  for l_ni=0 to size(prd:pDemo)-1
+    call PublicProg:SplitChar(l_nRes,prd:sPtParameter[l_ni],"/",sPtpara)
+    if l_nRes<0
+      return
+    endIf
+    
+    //pIn
+    if sPtpara[0]!="-1"
+      movej(SparePonit:pPoint[sPtpara],tTool,prd:mJoint)
+    endIf
+    //
+    if sPtpara[1]!="-1"
+      movej(SparePonit:pPoint[sPtpara],tTool,prd:mJoint)
+    endIf
+    
+    pDemo.trsf=prd:pDemo[l_ni].trsf
+    pDemo.config=cConfig
+    if l_ni==0 or l_ni==1
+      movej(pDemo,tTool,prd:mJoint)
+    else
+      movel(pDemo,tTool,prd:mNormal)
+    endIf
+    //IO
+    if sPtpara[3]!="-1"
+      if find(sPtpara[3],"dIn")>-1
+        waitEndMove()
+        wait(IO:dIn[sPtpara[3]]==true)
+      else
+        IO:dOut[sPtpara[4]]=true
+        delay(0.5)
+      endIf
+    endIf
+    if sPtpara[4]!="-1"
+      if find(sPtpara[4],"dIn")>-1
+        waitEndMove()
+        wait(IO:dIn[sPtpara[3]]==true)
+      else
+        IO:dOut[sPtpara[4]]=true
+        delay(0.5)
+      endIf
+    endIf
+    //delay
+    //
+    //pOut
+    if sPtpara[2]!="-1"
+      movej(SparePonit:pPoint[sPtpara],tTool,prd:mJoint)
+    endIf
+    
+  endFor
+  if x_bSingle
+    waitEndMove()
+  endIf
+  
+end]]></Code>
+  </Program>
+</Programs>

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="madol">
+    <Locals>
+      <Local name="l_nj" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  n2=0
+  waitEndMove()
+  //码盘for循环，3x3
+  for ni=0 to 2 step 1
+    for nc=0 to 2 step 1
+      //抓取准备点
+      movej(jready,t1,m1)
+      do
+        //检测吸真空状态
+        if dixi==false
+          //p1抓取点正上方
+          movel(compose(p1,f1,{nc*180,ni*100,0,0,0,0}),t1,m1)
+          //p2抓取点
+          movel(compose(p2,f1,{nc*180,ni*100,0,0,0,0}),t1,m1)
+          waitEndMove()
+          //输出吸真空
+          doxi=true
+          delay(0.8)
+          movel(compose(p1,f1,{nc*180,ni*100,0,0,0,0}),t1,m1)
+          waitEndMove()
+          //计算次数
+          n2=n2+1
+          waitEndMove()
+        endIf
+        //如果两次无料
+        if n2==2
+          movel(compose(p1,f1,{nc*180,ni*100,0,0,0,0}),t1,m1)
+          waitEndMove()
+          //暂停
+          stopMove()
+          //标记切换状态
+          bruning=false
+          bPause=true
+          doxi=false
+          n2=0
+          waitEndMove()
+          //等待启动按钮触发
+          wait(distart==true)
+          waitEndMove()
+          //继续运行
+          restartMove()
+          movel(compose(p2,f1,{nc*180,ni*100,0,0,0,0}),t1,m1)
+          waitEndMove()
+          doxi=true
+          delay(0.5)
+          movel(compose(p1,f1,{nc*180,ni*100,0,0,0,0}),t1,m1)
+          waitEndMove()
+        endIf
+      until dixi==true
+      //重置吸料检测次数
+      n2=0
+      //准备打磨点
+      movej(jbegin,t1,m1)
+      waitEndMove()
+      //偏移量。。输出屏幕
+      nPYtest=nPY*-0.003
+      gotoxy(1,1)
+      put(nPYtest)
+      //=========================================================
+      //一整段打磨程序
+      call proDEMO()
+      waitEndMove()
+      //------------------------------------------------------------------------------------
+      waitEndMove()
+      //生产工件数量+1
+      nPY=nPY+1
+      //npyb是触发打磨x个向下补偿一次
+      nPYB=nPYB+1
+      if nPYB==1
+        //npyc是直接补偿
+        nPYC=nPYC+1
+        nPYB=0
+      endIf
+      //这是客户要求的阻碍开关 打磨完阻碍再jbegin点
+      if ditab==true
+        movej(jbegin,t1,m1)
+        waitEndMove()
+        //暂停
+        stopMove()
+        //等待这个切换开关关闭
+        wait(ditab==false)
+        restartMove()
+      endIf
+      //打磨结束连接点
+      movej(jend,t1,m1)
+      waitEndMove()
+      //卸料点
+      movej(jXieLiao,t1,m1)
+      waitEndMove()
+      //吸真空关闭，吹气开启卸料
+      doxi=false
+      dochui=true
+      waitEndMove()
+      delay(0.2)
+      waitEndMove()
+      wait(dixi==false)
+      dochui=false
+      //
+      movej(jXieLiao,t1,m1)
+      delay(0.5)
+      //客户自己添加的一个卸料感应程序
+      if diganying==true
+        //单循环阻碍的一个条件
+        bstop=true
+      endIf
+      //回到原点
+      movej(jstart,t1,m1)
+      waitEndMove()
+      //当做了2000个时，补偿置0，更换砂带
+      if nPY==2000
+        stopMove()
+        gotoxy(5,5)
+        popUpMsg("1000次补偿完成，请更换砂带")
+        nPYC=0
+        nPY=0
+        nPYtest=0
+        //等待更换砂带后触发条件
+        wait(distart==true)
+        restartMove()
+      endIf
+      //这里bstop阻碍整个程序的运行，也就是单循环停止
+      wait(bstop==false)
+    endFor
+  endFor
+  waitEndMove()
+end]]></Code>
+  </Program>
+</Programs>

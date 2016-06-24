@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="EnterPageKey">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_nKey" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_nSelect" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_sItem" type="string" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_sStr" type="string" xsi:type="array" size="1" />
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_sEmpty" type="string" xsi:type="array" size="1" />
+      <Local name="l_sValue" type="string" xsi:type="array" size="1" />
+      <Local name="l_nItem" type="num" xsi:type="array" size="1" />
+      <Local name="l_nView" type="num" xsi:type="array" size="1" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+      <Local name="lp" type="point" xsi:type="array" size="1" />
+      <Local name="l_sYN" type="string" xsi:type="array" size="2" />
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  switch x_nSelect
+    case 0
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],fFrame[sItem].trsf.x,x_nSelect)
+      endIf
+    break
+    case 1
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],fFrame[sItem].trsf.y,x_nSelect)
+      endIf
+    break
+    case 2
+      if x_nKey==270
+         call user:editNum(x_sItem,sListItemValue[x_nSelect],fFrame[sItem].trsf.z,x_nSelect)
+      endIf
+    break
+    case 3
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],fFrame[sItem].trsf.rx,x_nSelect)
+      endIf
+    break
+    case 4
+      if x_nKey==27
+         call user:editNum(x_sItem,sListItemValue[x_nSelect],fFrame[sItem].trsf.ry,x_nSelect)
+      endIf
+    break
+    case 5
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],fFrame[sItem].trsf.rz,x_nSelect)
+      endIf
+    break
+  endSwitch
+  if x_nKey==270
+    bUserRefresh=true
+    bListRefresh=true
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

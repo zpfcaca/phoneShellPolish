@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="JudgeSpace" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_nRes" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_sStrIn" type="string" xsi:type="element" />
+    </Parameters>
+    <Locals>
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //判断一个字符串是否是空格字符串
+  //x_nRes=0:非空格字符串
+  //x_nRes=1:空格字符串
+  //x_nRes=2:空字符串
+  x_nRes=0
+  if x_sStrIn==""
+    x_nRes=2
+    return 
+  endIf
+  for l_i=0 to len(x_sStrIn)-1
+    if left(x_sStrIn,1)==" "
+      x_sStrIn=right(x_sStrIn,len(x_sStrIn)-1)
+    else
+      return
+    endIf
+  endFor
+  x_nRes=1
+end]]></Code>
+  </Program>
+</Programs>

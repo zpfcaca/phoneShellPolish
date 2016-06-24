@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="Record" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_tTool" type="tool" xsi:type="element" />
+    </Parameters>
+    <Locals>
+      <Local name="l_sString" type="string" xsi:type="array" size="1" />
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+      <Local name="l_nVel" type="num" xsi:type="array" size="1" />
+      <Local name="l_pPoint" type="point" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  wait(bRecord==true and !isEmpty())
+  l_ni=1
+  l_sString=""
+  do
+    l_nVel=getSpeed(x_tTool)
+    l_pPoint=here(x_tTool,world)
+    l_sString=toString("",l_ni)+" "+toString(".1",l_nVel)+" "+toString(".2", l_pPoint.trsf.x)+" "+toString(".2", l_pPoint.trsf.y)
+    l_sString=l_sString+" "+toString(".2", l_pPoint.trsf.z)
+    call WriteFile(l_sString)
+    l_ni=l_ni+1
+    delay(0)
+  until isEmpty()==true
+end]]></Code>
+  </Program>
+</Programs>

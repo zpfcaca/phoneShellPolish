@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="EnterPageKey">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_nKey" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_nSelect" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_sItem" type="string" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_sStr" type="string" xsi:type="array" size="1" />
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_sEmpty" type="string" xsi:type="array" size="1" />
+      <Local name="l_sValue" type="string" xsi:type="array" size="1" />
+      <Local name="l_nItem" type="num" xsi:type="array" size="1" />
+      <Local name="l_nView" type="num" xsi:type="array" size="1" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+      <Local name="lp" type="point" xsi:type="array" size="1" />
+      <Local name="l_sYN" type="string" xsi:type="array" size="2" />
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+      <Local name="l_nWorkMode" type="num" xsi:type="array" size="1" />
+      <Local name="l_nStatus" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  switch x_nSelect
+    case 0
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],PublicData:jHome.j1,x_nSelect)
+      endIf
+    break
+    case 1
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],PublicData:jHome.j2,x_nSelect)
+      endIf
+    break
+    case 2
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],PublicData:jHome.j3,x_nSelect)
+      endIf
+    break
+    case 3
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],PublicData:jHome.j4,x_nSelect)
+      endIf
+    break
+    case 4
+      if x_nKey==27
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],PublicData:jHome.j5,x_nSelect)
+      endIf
+    break
+    case 5
+      if x_nKey==270
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],PublicData:jHome.j6,x_nSelect)
+      endIf
+    break
+  endSwitch
+  if x_nKey==271
+    PublicData:jHome=herej()
+    sParameter[0]="j1"
+    sParameter[1]="j2"
+    sParameter[2]="j3"
+    sParameter[3]="j4"
+    sParameter[4]="j5"
+    sParameter[5]="j6"
+    sListItemValue[0]=toString(".3",PublicData:jHome.j1)
+    sListItemValue[1]=toString(".3",PublicData:jHome.j2)
+    sListItemValue[2]=toString(".3",PublicData:jHome.j3)
+    sListItemValue[3]=toString(".3",PublicData:jHome.j4)
+    sListItemValue[4]=toString(".3",PublicData:jHome.j5)
+    sListItemValue[5]=toString(".3",PublicData:jHome.j6)
+    for l_i=0 to size(sParameter)-1
+      call user:strlength(sParameter[l_i],user:nBottomX/2)
+      l_sValue=sListItemValue[l_i]
+      call user:strlength(l_sValue,user:nBottomX/2+1)
+      sParameter[l_i]=sParameter[l_i]+":"+l_sValue
+    endFor
+    popUpMsg("记录完成")
+  endIf
+  
+  if x_nKey==272
+    l_nWorkMode=workingMode(l_nStatus)
+    if l_nWorkMode!=1
+      popUpMsg("切换到手动模式")
+      return
+    endIf
+    call user:timerDialog("正在回安全点......",0)
+      movej(PublicData:jHome,flange,mHome)
+      waitEndMove()
+    endIf
+    
+  
+  if x_nKey==270 or x_nKey==271 or x_nKey==272
+    bUserRefresh=true
+    bListRefresh=true
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

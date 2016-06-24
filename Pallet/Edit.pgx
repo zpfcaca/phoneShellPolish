@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="Edit">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sName" type="string" xsi:type="element" />
+    </Parameters>
+    <Locals>
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_nRes" type="num" xsi:type="array" size="1" />
+      <Local name="l_nSelect" type="num" xsi:type="array" size="1" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+      <Local name="l_sValue" type="string" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //edit the pallet 
+  cls()
+  resize(sParameter,1,7)
+  sParameter[0]="原点"
+  sParameter[1]="X点"
+  sParameter[2]="Y点"
+  sParameter[3]="dX"
+  sParameter[4]="dY"
+  sParameter[5]="起点"
+  sParameter[6]="工具"
+  //
+  resize(sListItemValue,1,size(sParameter))
+  sListItemValue[0]=""
+  sListItemValue[1]=""
+  sListItemValue[2]=""
+  sListItemValue[3]=toString(".3",uPallet[x_sName].ndX)
+  sListItemValue[4]=toString(".3",uPallet[x_sName].ndY)
+  sListItemValue[5]=""
+  sListItemValue[6]=uPallet[sItem].sToolName
+  
+  //
+  for l_i=0 to size(sParameter)-1
+    call user:strlength(sParameter[l_i],user:nBottomX/2)
+    l_sValue=sListItemValue[l_i]
+    call user:strlength(l_sValue,user:nBottomX/2+1)
+    sParameter[l_i]=sParameter[l_i]+":"+l_sValue
+  endFor
+
+  bUserRefresh=true
+  bListRefresh=true
+  nPage=1
+  pPonit[0].trsf=uPallet[sItem].pO.trsf
+  pPonit[1].trsf=uPallet[sItem].pX.trsf
+  pPonit[2].trsf=uPallet[sItem].pY.trsf
+  //
+  do
+    call Refresh()
+    call user:setList(x_sName,sParameter,bUserRefresh,bListRefresh,nSelected,l_sItem,l_nKey)
+    bUserRefresh=false
+    bListRefresh=false
+    call EnterPageKey(l_nKey,nSelected,sParameter[nSelected])
+    delay(0)
+  until l_nKey==255 or l_nKey==278
+  //保存坐标系
+  pPonit[0].trsf=uPallet[sItem].pO.trsf
+  pPonit[1].trsf=uPallet[sItem].pX.trsf
+  pPonit[2].trsf=uPallet[sItem].pY.trsf
+  setFrame(pPonit[0],pPonit[1],pPonit[2],fFrame)
+  //
+  libSave()
+  nPage=0
+  bUserRefresh=true
+  bListRefresh=true
+end]]></Code>
+  </Program>
+</Programs>

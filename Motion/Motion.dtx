@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Data/2">
+  <Datas>
+    <Data name="mNomSpeed" access="private" xsi:type="array" type="mdesc" size="1" />
+    <Data name="bPause" access="private" xsi:type="array" type="bool" size="1" />
+    <Data name="bRuning" access="private" xsi:type="array" type="bool" size="1" />
+    <Data name="bStop" access="private" xsi:type="array" type="bool" size="1" />
+    <Data name="tTool" access="private" xsi:type="array" type="tool" size="1">
+      <Value key="0" fatherId="flange[0]" ioLink="valve1" />
+    </Data>
+    <Data name="fFrame" access="private" xsi:type="array" type="frame" size="1">
+      <Value key="0" fatherId="world[0]" />
+    </Data>
+    <Data name="pDemo" access="private" xsi:type="array" type="pointRx" size="1">
+      <Value key="0" fatherId="fFrame[0]" />
+    </Data>
+    <Data name="sFolder" access="private" xsi:type="array" type="string" size="1">
+      <Value key="0" value="Disk://Traj/" />
+    </Data>
+    <Data name="sPtpara" access="private" xsi:type="array" type="string" size="1" />
+    <Data name="cConfig" access="private" xsi:type="array" type="configRx" size="1" />
+    <Data name="l_nRes" access="private" xsi:type="array" type="num" size="1" />
+    <Data name="bExit" access="private" xsi:type="array" type="bool" size="1" />
+    <Data name="bUserRefresh" access="private" xsi:type="array" type="bool" size="1" />
+    <Data name="bListRefresh" access="private" xsi:type="array" type="bool" size="1" />
+    <Data name="sPath" access="private" xsi:type="array" type="string" size="1" />
+    <Data name="sList" access="private" xsi:type="array" type="string" size="1" />
+    <Data name="nSelected" access="private" xsi:type="array" type="num" size="1" />
+    <Data name="sItem" access="private" xsi:type="array" type="string" size="1" />
+    <Data name="sProductList" access="private" xsi:type="array" type="string" size="1" />
+    <Data name="pPoint" access="private" xsi:type="array" type="pointRx" size="1">
+      <Value key="0" fatherId="world[0]" />
+    </Data>
+    <Data name="pSparePoint" access="private" xsi:type="array" type="pointRx" size="1">
+      <Value key="0" fatherId="world[0]" />
+    </Data>
+    <Data name="sMsg" access="private" xsi:type="array" type="string" size="8" />
+  </Datas>
+</Database>

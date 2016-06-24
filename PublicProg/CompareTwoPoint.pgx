@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="CompareTwoPoint" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_FirstPoint" type="point" xsi:type="element" />
+      <Parameter name="x_SecondPoint" type="point" xsi:type="element" />
+      <Parameter name="x_bSame" type="bool" xsi:type="element" use="reference" />
+    </Parameters>
+    <Code><![CDATA[begin
+  //比较两个点是否相同
+  x_bSame=false
+  if distance(x_FirstPoint,x_SecondPoint)<0.5
+    x_bSame=true
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

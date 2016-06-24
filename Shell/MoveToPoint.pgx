@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="MoveToPoint">
+    <Locals>
+      <Local name="l_nStatus" type="num" xsi:type="array" size="1" />
+      <Local name="l_nWorkMode" type="num" xsi:type="array" size="1" />
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  link(pTemp,fFrmTemp)
+  while true
+    l_nWorkMode=workingMode(l_nStatus)
+    if l_nWorkMode==1 and l_nStatus==0
+      pTemp.trsf=pdemo[nSelected].trsf
+      pTemp.config=pdemo[nSelected].config
+      movel(pTemp,t2,mSuDu[1])
+    else
+      resetMotion()
+    endIf
+  endWhile
+  //
+end]]></Code>
+  </Program>
+</Programs>

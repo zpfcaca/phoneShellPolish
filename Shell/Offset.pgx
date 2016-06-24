@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="Offset">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_trOffset" type="trsf" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_nSelect" type="num" xsi:type="array" size="1" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+      <Local name="l_sValue" type="string" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  cls()
+  resize(sParameter,1,3)
+  sParameter[0]="X"
+  sParameter[1]="Y"
+  sParameter[2]="Z"
+  resize(sListItemValue,1,size(sParameter))
+  sListItemValue[0]=toString(".2",x_trOffset.x)
+  sListItemValue[1]=toString(".2",x_trOffset.y)
+  sListItemValue[2]=toString(".2",x_trOffset.z)
+
+  //增加变量
+  for l_i=0 to size(sParameter)-1
+    call user:strlength(sParameter[l_i],user:nBottomX/2)
+    l_sValue=sListItemValue[l_i]
+    call user:strlength(l_sValue,user:nBottomX/2+1)
+    sParameter[l_i]=sParameter[l_i]+":"+l_sValue
+  endFor
+
+  bUserRefresh=true
+  bListRefresh=true
+  //
+  do
+    if bUserRefresh
+      cls()
+      call user:clear(0,13)
+      call user:typeMenu(8,"确定")
+    endIf
+    call user:setList("偏移",sParameter,bUserRefresh,bListRefresh,l_nSelect,l_sItem,l_nKey)
+    bUserRefresh=false
+    bListRefresh=false
+    call EnterPageKey(l_nKey,l_nSelect,sParameter[l_nSelect],x_trOffset)
+    delay(0)
+  until l_nKey==255 or l_nKey==278
+  fFrmTemp.trsf=frmaster.trsf*trOffset
+  bUserRefresh=true
+  bListRefresh=true
+end]]></Code>
+  </Program>
+</Programs>

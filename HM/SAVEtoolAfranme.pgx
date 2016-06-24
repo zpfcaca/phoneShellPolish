@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="SAVEtoolAfranme" access="private" >
+    <Code><![CDATA[begin
+  for nframe=0 to 9
+    lib:frmaster[nframe].trsf=frmaster[nframeSave[nframe]].trsf
+  endFor
+  for ntool=0 to 9
+    lib:t2[ntool].trsf=t2[ntoolSave[ntool]].trsf
+  endFor
+end]]></Code>
+  </Program>
+</Programs>

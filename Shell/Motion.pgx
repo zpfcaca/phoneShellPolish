@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="Motion" access="private" >
+    <Code><![CDATA[begin
+  //当b1:true,执行Joint to point转换
+  if b1==true
+    call JTP()
+    call Message("数据转换完成",true)
+  endIf
+
+  //等待机器人处于jstart
+  call CheckRobPos(jstart,bRobAtStP)
+  if !bRobAtStP
+    call Message("等待机器人到位",true)
+  endIf
+  while !bRobAtStP
+    call CheckRobPos(jstart,bRobAtStP)
+    delay(0)
+  endWhile
+  call Message("机器人到位",true)
+
+  //等待外部启动
+  if distart!=true
+    call Message("等待启动",true)
+  endIf
+  wait(distart==true)
+
+  //机器人上电
+  enablePower()
+  wait(isPowered()==true)
+  //
+  while true
+    call madol()
+  endWhile
+end]]></Code>
+  </Program>
+</Programs>

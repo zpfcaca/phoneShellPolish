@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="tooolAndFrame" access="private" >
+    <Code><![CDATA[begin
+  for nframe=0 to 9
+    frmaster[nframe].trsf=lib:frmaster[nframeSave[nframe]].trsf
+    delay(0)
+  endFor
+  for ntool=0 to 9
+    t2[ntool].trsf=lib:t2[ntoolSave[ntool]].trsf
+    delay(0)
+  endFor
+end]]></Code>
+  </Program>
+</Programs>

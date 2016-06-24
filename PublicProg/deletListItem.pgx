@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="deletListItem" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sList" type="string" xsi:type="array" use="reference" />
+      <Parameter name="x_nFirst" type="num" xsi:type="element" />
+      <Parameter name="x_nSelect" type="num" xsi:type="element" use="reference" />
+      <Parameter name="x_bListRefresh" type="bool" xsi:type="element" use="reference" />
+      <Parameter name="x_bRes" type="bool" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_sYesNo" type="string" xsi:type="array" size="2" />
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //F3:
+  //x_nFirst:>=n(n>=1),按顺序保留的前n项
+  //x_nFirst:0 不按顺序保留最后一项
+  //x_nFirst:-1 全部删除,x_sList[0]=""
+  x_bListRefresh=false
+  x_bRes=false
+  l_sYesNo[0]="是"
+  l_sYesNo[1]="否"
+  call user:questionDialog("是否删除该项?",l_sYesNo,l_i)
+  if l_i==0 or l_i==1
+    //
+    x_nFirst=roundDown(x_nFirst)
+    if x_nFirst==0
+      if size(x_sList)==1
+        popUpMsg("不能删除项!")
+        return
+      endIf
+    endIf
+    if size(x_sList)<=x_nFirst or x_nSelect<x_nFirst
+      popUpMsg("不能删除项!")
+      return
+    endIf
+    if size(x_sList)==1 and x_nFirst==-1
+      x_sList=""
+      x_bRes=true
+      x_bListRefresh=true
+      return
+    endIf
+    delete(x_sList[x_nSelect])
+    x_nSelect=x_nSelect-1
+    if x_nSelect<0
+      x_nSelect=0
+    endIf
+    x_bListRefresh=true
+    x_bRes=true
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

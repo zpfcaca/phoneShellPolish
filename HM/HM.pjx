@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://www.staubli.com/robotics/VAL3/Project/3">
+  <Parameters version="s7.8.2" stackSize="5000" millimeterUnit="true" />
+  <Programs>
+    <Program file="JTPdemo.pgx" />
+    <Program file="loadmaster0.pgx" />
+    <Program file="loadmaster1.pgx" />
+    <Program file="loadmaster2.pgx" />
+    <Program file="loadmaster3.pgx" />
+    <Program file="loadmaster4.pgx" />
+    <Program file="loadmaster5.pgx" />
+    <Program file="loadmaster6.pgx" />
+    <Program file="loadmaster7.pgx" />
+    <Program file="loadmaster8.pgx" />
+    <Program file="loadmaster9.pgx" />
+    <Program file="madol.pgx" />
+    <Program file="oldmaduofrme.pgx" />
+    <Program file="proDEMO.pgx" />
+    <Program file="saveOldframe.pgx" />
+    <Program file="SAVEtoolAfranme.pgx" />
+    <Program file="SMOVE.pgx" />
+    <Program file="start.pgx" />
+    <Program file="stop.pgx" />
+    <Program file="takestop.pgx" />
+    <Program file="tooolAndFrame.pgx" />
+  </Programs>
+  <Database>
+    <Data file="HM.dtx" />
+  </Database>
+  <Libraries>
+    <Library alias="master" path="Disk://master/master.pjx" />
+    <Library alias="lib" path="Disk://frmtool/frmtool.pjx" />
+  </Libraries>
+</Project>

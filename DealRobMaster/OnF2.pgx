@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="OnF2">
+    <Locals>
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //全部转换
+  for l_ni=0 to size(sFileList)-1
+    call OnePathConvert(sFolder,sFileList[l_ni],sOutputFolder,l_bRes)
+    if !l_bRes
+      popUpMsg(sFileList[l_ni]+"文件转换失败!")
+      logMsg(sFileList[l_ni]+"文件转换失败!")
+      wait(getKey()==278)
+    endIf
+  endFor
+  popUpMsg("转换完成")
+end]]></Code>
+  </Program>
+</Programs>

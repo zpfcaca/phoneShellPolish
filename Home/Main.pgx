@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="Main" access="public">
+    <Locals>
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  bUserRefresh=bListRefresh=true
+  bExit=false
+  //
+  do
+    call Refresh()
+    call RefreshList()
+    call user:setList("",sList,bUserRefresh,bListRefresh,nSelected,sItem,l_nKey)
+    bUserRefresh=false
+    bListRefresh=false
+    call MainKey(l_nKey)
+    delay(0)
+  until bExit
+
+end]]></Code>
+  </Program>
+</Programs>

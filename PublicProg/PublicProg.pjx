@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://www.staubli.com/robotics/VAL3/Project/3">
+  <Parameters version="s7.8.3" stackSize="5000" millimeterUnit="true" />
+  <Programs>
+    <Program file="addBoolArray.pgx" />
+    <Program file="addDirectory.pgx" />
+    <Program file="addListItem.pgx" />
+    <Program file="addMedscArray.pgx" />
+    <Program file="addNumArray.pgx" />
+    <Program file="addPointArray.pgx" />
+    <Program file="addStrArray.pgx" />
+    <Program file="addStrArray1.pgx" />
+    <Program file="CompareTwoJoint.pgx" />
+    <Program file="CompareTwoPoint.pgx" />
+    <Program file="CopyStrArray.pgx" />
+    <Program file="CutBlankLine.pgx" />
+    <Program file="CutSpace.pgx" />
+    <Program file="deletListItem.pgx" />
+    <Program file="delJRsArray.pgx" />
+    <Program file="delNumArray.pgx" />
+    <Program file="delPointArray.pgx" />
+    <Program file="delStrArray.pgx" />
+    <Program file="delStrArray1.pgx" />
+    <Program file="delToolArray.pgx" />
+    <Program file="FileClose.pgx" />
+    <Program file="FindStr.pgx" />
+    <Program file="GetArrayIndex.pgx" />
+    <Program file="JudgeSpace.pgx" />
+    <Program file="SplitChar.pgx" />
+  </Programs>
+  <Database>
+    <Data file="PublicProg.dtx" />
+  </Database>
+  <Libraries>
+    <Library alias="user" path="Disk://userPage/USERPAGE.pjx" />
+  </Libraries>
+</Project>

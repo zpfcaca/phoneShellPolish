@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="RefreshList">
+    <Locals>
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  
+  if bListRefresh
+    resize(sList,1,32)
+    for l_ni=0 to 15
+      sList[l_ni]="dIn"+toString("",l_ni+1)
+      sList[l_ni+15]="dOut"+toString("",l_ni+1)    
+    endFor
+  endIf
+
+end]]></Code>
+  </Program>
+</Programs>

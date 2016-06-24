@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="addListItem" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sName" type="string" xsi:type="element" use="reference" />
+      <Parameter name="x_sListName" type="string" xsi:type="array" use="reference" />
+      <Parameter name="x_sPrefix" type="string" xsi:type="element" />
+    </Parameters>
+    <Locals>
+      <Local name="l_sItemName" type="string" xsi:type="array" size="1" />
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_i" type="num" xsi:type="array" size="1" />
+      <Local name="l_nPos" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //新建
+  do
+    call user:listframe("名称",10,5,20,1)
+    call user:clear(11,6)
+    gotoxy(15,6)
+    l_nKey=get(l_sItemName)
+    call JudgeSpace(l_i,l_sItemName)
+    if l_nKey==270
+      //输入为空,赋予一个值
+      if l_sItemName==""
+        l_i=0
+        l_sItemName=x_sPrefix+toString("",l_i+1)
+        while l_nPos!=-1
+          call FindStr(l_sItemName,x_sListName,l_nPos)
+          if l_nPos!=-1
+            l_i=l_i+1
+            l_sItemName=x_sPrefix+toString("",l_i+1)
+          endIf
+        endWhile
+        x_sName=l_sItemName
+      else
+        call FindStr(l_sItemName,x_sListName,l_nPos)
+        if l_nPos!=-1
+          popUpMsg("重复，请重新输入")
+          l_sItemName=""
+        else
+          x_sName=l_sItemName
+          return
+        endIf
+      endIf
+    endIf
+    delay(0)
+  until l_nKey==255
+end]]></Code>
+  </Program>
+</Programs>

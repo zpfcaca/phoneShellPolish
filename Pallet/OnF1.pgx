@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="OnF1" access="private" >
+    <Code><![CDATA[begin
+  switch nPage
+    case 0
+      call Edit(sItem)
+    break
+    case 1
+      switch nSelected
+        case 0
+          uPallet[sItem].pO=here(tTool,world)
+          popUpMsg("OK")
+        break
+        case 1
+          uPallet[sItem].pO=here(tTool,world)
+          popUpMsg("OK")
+        break
+        case 2
+          uPallet[sItem].pO=here(tTool,world)
+          popUpMsg("OK")
+        break
+      endSwitch
+    break
+
+  endSwitch
+end]]></Code>
+  </Program>
+</Programs>

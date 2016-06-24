@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="JTP" access="private" >
+    <Locals>
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //建立坐标系
+  setFrame(pt1,pt2,pt3,frmaster)
+  //数据转换
+
+  for l_ni=0 to nSize-1
+    pdemo[l_ni]=jointToPoint(t2,frmaster,A130:ptRoutingPath[l_ni])
+  endFor
+end]]></Code>
+  </Program>
+</Programs>

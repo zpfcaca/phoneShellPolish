@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="Init">
+    <Locals>
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  nPage=0
+  for l_ni=0 to 7
+    sMsg[l_ni]=""
+  endFor
+  //
+  nSize=size(A130:ptRoutingPath)
+  resize(sList,1,nSize)
+  //
+  //
+
+  //
+  bUserRefresh=bListRefresh=true
+  //
+  bExit=false
+
+  //
+  if bInit
+    call JTP()
+    libSave()
+  endIf
+  fFrmTemp.trsf=frmaster.trsf
+end]]></Code>
+  </Program>
+</Programs>

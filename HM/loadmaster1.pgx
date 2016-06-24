@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="loadmaster1" access="private" >
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1" >
+      <Parameter name="x_sMasterFile1" type="string" use="value" xsi:type="element" dimensions="1" />
+    </Parameters>
+    <Code><![CDATA[begin
+  if master:libLoad(x_sMasterFile1)<0
+    popUpMsg("nO ok")
+  endIf
+  frmaster[1].trsf=master:tTool.trsf
+  //取个数
+  nsize[1]=size(master:ptRoutingPath)
+  //存个数
+  resize(pdemo1,1,nsize[1])
+  //保存程序
+  master:libSave()
+end]]></Code>
+  </Program>
+</Programs>

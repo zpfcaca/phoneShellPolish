@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="SMOVE">
+    <Code><![CDATA[begin
+  //
+  while true
+    if bruning==true and distart==true
+      stopMove()
+      bPause=true
+      bruning=false
+      wait(distart==false)
+    endIf
+    if bPause and distart==true
+      restartMove()
+      bruning=true
+      bPause=false
+      wait(distart==false)
+    endIf
+    delay(0)
+  endWhile
+end]]></Code>
+  </Program>
+</Programs>

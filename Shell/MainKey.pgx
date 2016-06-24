@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="MainKey">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_nKey" type="num" xsi:type="element" />
+    </Parameters>
+    <Locals>
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  
+  switch x_nKey
+    //砂带初始化
+    case 271
+      call OnF1()
+    break
+    //坐标整体偏移
+    case 272
+      call OnF2()
+    break
+    //记录
+    case 273
+      call OnF3()
+    break
+    //运行
+    case 274
+      taskSuspend("Move2P")
+      call OnF4()
+      taskResume("Move2P",0)
+    break
+    //
+    case 275
+    break
+    //重载数据
+    case 276
+      call OnF6()
+    break
+    //保存
+    case 277
+      call OnF7()
+    break
+  endSwitch
+end]]></Code>
+  </Program>
+</Programs>

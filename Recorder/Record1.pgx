@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="Record1" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_tTool" type="tool" xsi:type="element" />
+      <Parameter name="x_pPoint" type="pointRx" xsi:type="element" />
+      <Parameter name="x_nDia" type="num" xsi:type="element" />
+    </Parameters>
+    <Locals>
+      <Local name="l_sString" type="string" xsi:type="array" size="1" />
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+      <Local name="l_nVel" type="num" xsi:type="array" size="1" />
+      <Local name="l_pPoint" type="point" xsi:type="array" size="3" />
+      <Local name="l_nNum" type="num" xsi:type="array" size="3" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  wait(bRecord==true and !isEmpty())
+  l_ni=1
+  l_sString=""
+  do
+    l_pPoint[0]=here(x_tTool,world)
+    //cmd 与半径差值
+    l_nNum[0]=distance(l_pPoint[0],x_pPoint)-x_nDia/2
+    //fbk与半径差值
+    l_pPoint[1]=$getPosFbk(x_tTool,world)
+    l_nNum[1]=distance(l_pPoint[1],x_pPoint)-x_nDia/2
+    //cmd 与 fbk
+    l_nNum[2]=distance(l_pPoint[0],l_pPoint[1])
+    l_sString=toString(".5",l_nNum[0])+","+toString(".5",l_nNum[1])+","+toString(".5",l_nNum[2])
+    call WriteFile(l_sString)
+    delay(0)
+  until isEmpty()==true
+  bRecord=false
+end]]></Code>
+  </Program>
+</Programs>

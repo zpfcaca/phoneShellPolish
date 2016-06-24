@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="SetProerty" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sTitle" type="string" xsi:type="element" />
+      <Parameter name="x_nTopX" type="num" xsi:type="element" />
+      <Parameter name="x_nTopY" type="num" xsi:type="element" />
+      <Parameter name="x_nBottomX" type="num" xsi:type="element" />
+      <Parameter name="x_nBottomY" type="num" xsi:type="element" />
+      <Parameter name="x_sListItem" type="string" xsi:type="array" use="reference" />
+      <Parameter name="x_sItem" type="string" xsi:type="element" use="reference" />
+    </Parameters>
+    <Locals>
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_nItem" type="num" xsi:type="array" size="1" />
+      <Local name="l_sTemp" type="string" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  call setSizeList(x_nTopX,x_nTopY,x_nBottomX,x_nBottomY)
+  call listcreate(x_sTitle)
+  call listadd(x_sListItem)
+  call listupdate(0)
+  call clear(0,13)
+  call typeMenu(1,"OK")
+  l_sTemp=x_sItem
+  do
+    l_nKey=getKey()
+    call listevent(l_nKey,l_nItem,x_sItem)
+    delay(0)
+  until l_nKey==271 or l_nKey==255 or l_nKey==270
+  if l_nKey==255
+    x_sItem=l_sTemp
+  endIf
+  wait(getKey()==-1)
+end]]></Code>
+  </Program>
+</Programs>

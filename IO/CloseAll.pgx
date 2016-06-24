@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="CloseAll" access="public">
+    <Code><![CDATA[begin
+  dOut["dOut1"]=false
+  dOut["dOut2"]=false
+  dOut["dOut3"]=false
+  dOut["dOut4"]=false
+  dOut["dOut5"]=false
+  dOut["dOut6"]=false
+  dOut["dOut7"]=false
+  dOut["dOut8"]=false
+  dOut["dOut9"]=false
+  dOut["dOut10"]=false
+  dOut["dOut11"]=false
+  dOut["dOut12"]=false
+  dOut["dOut13"]=false
+  dOut["dOut14"]=false
+  dOut["dOut15"]=false
+  dOut["dOut16"]=false
+end]]></Code>
+  </Program>
+</Programs>

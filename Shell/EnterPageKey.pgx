@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="EnterPageKey" access="private" >
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1" >
+      <Parameter name="x_nKey" type="num" use="reference" xsi:type="element" dimensions="1" />
+      <Parameter name="x_nSelect" type="num" use="reference" xsi:type="element" dimensions="1" />
+      <Parameter name="x_sItem" type="string" use="reference" xsi:type="element" dimensions="1" />
+      <Parameter name="x_trOffset" type="trsf" use="reference" xsi:type="element" dimensions="1" />
+    </Parameters>
+    <Locals>
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+      <Local name="l_nItem" type="num" xsi:type="array" size="1" />
+      <Local name="l_nKey" type="num" xsi:type="array" size="1" />
+      <Local name="l_nView" type="num" xsi:type="array" size="1" />
+      <Local name="l_sItem" type="string" xsi:type="array" size="1" />
+      <Local name="l_sStr" type="string" xsi:type="array" size="1" />
+      <Local name="l_sValue" type="string" xsi:type="array" size="1" />
+      <Local name="l_sYN" type="string" xsi:type="array" size="2" />
+      <Local name="lp" type="point" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  //
+  if x_nKey==270
+    switch x_nSelect
+      case 0
+
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],x_trOffset.x,x_nSelect)
+
+      break
+      //
+      case 1
+
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],x_trOffset.y,x_nSelect)
+
+      break
+      //
+      case 2
+
+        call user:editNum(x_sItem,sListItemValue[x_nSelect],x_trOffset.z,x_nSelect)
+
+      break
+    endSwitch
+    bUserRefresh=true
+    bListRefresh=true
+  endIf
+end]]></Code>
+  </Program>
+</Programs>

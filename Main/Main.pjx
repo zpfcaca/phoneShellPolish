@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://www.staubli.com/robotics/VAL3/Project/3">
+  <Parameters version="s7.8.3" stackSize="10000" millimeterUnit="true" />
+  <Programs>
+    <Program file="ContorlLight.pgx" />
+    <Program file="EnterPageKey.pgx" />
+    <Program file="Init.pgx" />
+    <Program file="Main.pgx" />
+    <Program file="MainKey.pgx" />
+    <Program file="OnF1.pgx" />
+    <Program file="OnF2.pgx" />
+    <Program file="OnF3.pgx" />
+    <Program file="OnF4.pgx" />
+    <Program file="OnF5.pgx" />
+    <Program file="OnF6.pgx" />
+    <Program file="OnF7.pgx" />
+    <Program file="OnF8.pgx" />
+    <Program file="Refresh.pgx" />
+    <Program file="SetPara.pgx" />
+    <Program file="start.pgx" />
+    <Program file="stop.pgx" />
+  </Programs>
+  <Database>
+    <Data file="Main.dtx" />
+  </Database>
+  <Libraries>
+    <Library alias="user" path="Disk://userPage/USERPAGE.pjx" />
+    <Library alias="RobMaster" path="Disk://DealRobMaster/DealRobMaster.pjx" />
+    <Library alias="Prd" path="Disk://Product/Product.pjx" />
+    <Library alias="Pallet" path="Disk://Pallet/Pallet.pjx" />
+    <Library alias="Path" path="Disk://Path/Path.pjx" />
+    <Library alias="Tool" path="Disk://Tool/Tool.pjx" autoload="false" />
+    <Library alias="Frame" path="Disk://Frame/Frame.pjx" autoload="false" />
+    <Library alias="IO" path="Disk://IO/IO.pjx" />
+    <Library alias="Home" path="Disk://Home/Home.pjx" autoload="false" />
+    <Library alias="PublicData" path="Disk://PublicData/PublicData.pjx" />
+    <Library alias="Motion" path="Disk://Motion/Motion.pjx" />
+    <Library alias="SparePoint" path="Disk://SparePoint/SparePoint.pjx" autoload="false" />
+    <Library alias="PublicProg" path="Disk://PublicProg/PublicProg.pjx" />
+    <Library alias="prd" path="Disk://template/normalPath/normalPath.pjx" />
+  </Libraries>
+</Project>

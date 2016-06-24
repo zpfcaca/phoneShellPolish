@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="StartMotion" access="public">
+    <Parameters xmlns="http://www.staubli.com/robotics/VAL3/Param/1">
+      <Parameter name="x_sPath" type="string" xsi:type="element" />
+    </Parameters>
+    <Code><![CDATA[begin
+  //
+  taskCreate "motion",100,SingleMotion(x_sPath,true,0)
+  wait(taskStatus("motion")==1)
+end]]></Code>
+  </Program>
+</Programs>

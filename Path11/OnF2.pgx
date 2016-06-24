@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="OnF2">
+    <Locals>
+      <Local name="l_ni" type="num" xsi:type="array" size="1" />
+      <Local name="l_bRes" type="bool" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  switch nPage
+    case 0
+      //模拟
+      call SimuMain()
+    break
+    case 1
+      //insert
+      nSelected=nSelected+1
+      insert(prd:pDemo[nSelected])
+      prd:pDemo[nSelected]=here(Tool:tTool[prd:sToolName],Frame:fFrame[prd:sFrameName])
+      insert(prd:sPtParameter[nSelected])
+      //添加点的信息
+    break
+    case 2
+    break
+    case 3
+    break
+    case 4
+    break
+    
+  endSwitch
+  
+end]]></Code>
+  </Program>
+</Programs>

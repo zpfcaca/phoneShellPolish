@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://www.staubli.com/robotics/VAL3/Project/3">
+  <Parameters version="s7.8.3" stackSize="5000" millimeterUnit="true" />
+  <Programs>
+    <Program file="JTP.pgx" />
+    <Program file="madol.pgx" />
+    <Program file="start.pgx" />
+    <Program file="stop.pgx" />
+    <Program file="takestop.pgx" />
+  </Programs>
+  <Database>
+    <Data file="T201601.dtx" />
+  </Database>
+  <Libraries>
+    <Library alias="master" path="Disk://template/normal/normal.pjx" autoload="false" />
+  </Libraries>
+</Project>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="sendInform" access="public">
+    <Code><![CDATA[begin
+  //把信号等信息传递
+  //计数
+  IO:dOut["dOut1"]=true
+  delay(0.5)
+  IO:dOut["dOut1"]=false
+  //
+  PublicData:nCompenCount=PublicData:nCompenCount+1
+  PublicData:nSumCompen=PublicData:nCompenCount*PublicData:nDelta
+  if PublicData:nCompenCount>PublicData:nBeltLife
+    PublicData:nSumCompen=0
+    PublicData:nCompenCount=0
+    popUpMsg("更换皮带")
+    stopMove()
+    disablePower()
+    PublicData:sStatus="pause"
+    call Message("更换皮带",true)
+    wait(IO:dIn["dIn1"]==true)
+    call Message("皮带已更换",true)
+  endIf
+
+end]]></Code>
+  </Program>
+</Programs>
